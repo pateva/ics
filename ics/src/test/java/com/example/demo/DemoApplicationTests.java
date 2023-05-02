@@ -33,7 +33,7 @@ class DemoApplicationTests {
 
 	@Test
 	public void testEmpty() throws Exception {
-		this.mockMvc.perform(get("/"))
+		mockMvc.perform(get("/"))
 				.andExpect(status().isOk())
 				.andExpect(content().string("Welcome to localhost:8080"));
 	}
