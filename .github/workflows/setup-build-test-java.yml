@@ -28,5 +28,5 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build without Tests
-      run: mvn -B package --file src/pom.xml -DskipTests
+      run: mvn -B package --file pom.xml -DskipTests
        
