@@ -29,4 +29,6 @@ jobs:
         cache: maven
     - name: Build without Tests
       run: mvn -B package --file ics/pom.xml -DskipTests
+    - name: Build with Tests
+      run: mvn -B package --file ics/pom.xml 
        
