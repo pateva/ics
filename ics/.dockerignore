@@ -1,5 +1,5 @@
 # target
 
 # ignore or exclude build directory
-*/build*
-*/*/build*
+# */build*
+# */*/build*
