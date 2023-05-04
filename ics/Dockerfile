@@ -3,7 +3,9 @@
 FROM eclipse-temurin:17-jdk-jammy
 
 # The /app directory should act as the main application directory
+RUN ls -al
 WORKDIR /ics
+RUN ls -al
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
