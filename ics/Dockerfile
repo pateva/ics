@@ -13,6 +13,8 @@ RUN ls -al
 COPY ics/.mvn/. /.mvn/
 COPY ics/mvnw ics/pom.xml ./
 
+RUN ls -al
+
 RUN chmod +x /ics/mvnw
 RUN /ics/mvnw dependency:resolve
 
