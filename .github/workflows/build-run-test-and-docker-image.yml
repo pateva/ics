@@ -23,8 +23,5 @@ jobs:
       run: mvn -B package --file ics/pom.xml -DskipTests
     - name: Build with Tests
       run: mvn -B package --file ics/pom.xml 
-      
-    - name: Give execute permission to mvnw
-      run: chmod +x mvnw
     - name: Build the Docker image
       run: docker build --build-arg ICS_DIR=ics . --file ics/Dockerfile --tag my-image-name:$(date +%s)
