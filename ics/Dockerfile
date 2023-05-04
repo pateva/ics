@@ -6,11 +6,11 @@ ARG DIR_ICS
 # The /app directory should act as the main application directory
 RUN ls -al
 
-COPY --chown=1000:1000 ${TEST}/. /ics/
+#COPY --chown=1000:1000 ${TEST}/. /ics/
 WORKDIR /ics
 RUN ls -al
 
-COPY .mvn/ .mvn
+COPY isc/.mvn/. /.mvn/
 COPY mvnw pom.xml ./
 
 RUN ./mvnw dependency:resolve
