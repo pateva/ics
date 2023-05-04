@@ -11,7 +11,7 @@ WORKDIR /ics
 RUN ls -al
 
 COPY ics/.mvn/. /.mvn/
-COPY mvnw ics/pom.xml ./
+COPY ics/mvnw ics/pom.xml ./
 
 RUN ./ics/mvnw dependency:resolve
 
