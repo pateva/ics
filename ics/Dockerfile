@@ -7,13 +7,13 @@ ARG DIR_ICS
 RUN ls -al
 
 #COPY --chown=1000:1000 ${TEST}/. /ics/
-WORKDIR /ics
+WORKDIR /ics/ics
 RUN ls -al
 
-COPY ics/.mvn/. /.mvn/
-COPY ics/mvnw ics/pom.xml ./
+COPY .mvn/. /.mvn/
+COPY mvnw pom.xml ./
 
-RUN ics/mvnw dependency:resolve
+RUN ./mvnw dependency:resolve
 
 # Copy local directories to the current local directory of our docker image (/ics)
 COPY src ./src
