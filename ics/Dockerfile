@@ -4,6 +4,8 @@ FROM eclipse-temurin:17-jdk-jammy
 
 # The /app directory should act as the main application directory
 RUN ls -al
+
+#COPY --chown=1000:1000
 WORKDIR /ics
 RUN ls -al
 
