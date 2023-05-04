@@ -13,7 +13,8 @@ RUN ls -al
 COPY ics/.mvn/. /.mvn/
 COPY ics/mvnw ics/pom.xml ./
 
-RUN sh /ics/mvnw dependency:resolve
+RUN chmod +x /ics/mvnw
+RUN /ics/mvnw dependency:resolve
 
 # Copy local directories to the current local directory of our docker image (/ics)
 COPY src ./src
