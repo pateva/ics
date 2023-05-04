@@ -3,9 +3,20 @@
 
 name: Maven Package
 
-on:
-  release:
-    types: [created]
+on: 
+  pull_request:
+    branches: [ "main" ]
+  push:
+    branches: [ "main" ]
+    
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Package'  
 
 jobs:
   build:
