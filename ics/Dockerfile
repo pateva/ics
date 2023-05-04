@@ -10,7 +10,7 @@ RUN ls -al
 WORKDIR /ics
 RUN ls -al
 
-COPY isc/.mvn/. /.mvn/
+COPY ics/.mvn/. /.mvn/
 COPY mvnw pom.xml ./
 
 RUN ./mvnw dependency:resolve
