@@ -31,7 +31,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file ics/pom.xml
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+    - name: Publish to GitHub Packages
+    
+      run:
+        mvn -f ics/ics/pom.xml
+        mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
