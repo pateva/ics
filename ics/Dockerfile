@@ -2,6 +2,7 @@
 
 FROM eclipse-temurin:17-jdk-jammy
 
+
 ARG DIR_ICS
 # The /app directory should act as the main application directory
 RUN ls -al
