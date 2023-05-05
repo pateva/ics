@@ -34,7 +34,7 @@ jobs:
     - name: Publish to GitHub Packages
     
       run:
-        mvn -f ics/pom.xml
-        mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        mvn -f ics/pom.xml deploy -s $GITHUB_WORKSPACE/settings.xml
+        #mvn deploy 
       env:
         GITHUB_TOKEN: ${{ github.token }}
