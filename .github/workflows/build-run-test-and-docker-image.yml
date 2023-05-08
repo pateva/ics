@@ -22,4 +22,4 @@ jobs:
     - name: Build with Tests
       run: mvn -B package --file ics/pom.xml 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file ics/Dockerfile --tag my-image-name:$(date +%s)
