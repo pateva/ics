@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.controllers.HelloController;
+import com.example.demo.controllers.RestController;
 import com.example.demo.models.Greeting;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class DemoApplicationTests {
 
 	@Autowired
-	private HelloController controller;
+	private RestController controller;
 
 	private MockMvc mockMvc;
 
