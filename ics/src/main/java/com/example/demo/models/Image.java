@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,15 +36,12 @@ public class Image {
     @Column(name = "image_service")
     private String imageService;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "image_label",
-            joinColumns = {@JoinColumn(name = "image_id")},
-            inverseJoinColumns = {@JoinColumn(name = "label_id")})
-    private Set<Label> labels = new HashSet<>();
+    @OneToMany(mappedBy = "image")
+    Set<ImageLabel> labels = new HashSet<>();
 
     public Image() {}
 
-    public Image(Long imageId, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt, double size, String imageService, Set<Label> labels) {
+    public Image(Long imageId, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt, double size, String imageService, Set<ImageLabel> labels) {
         this.imageId = imageId;
         this.imageUrl = imageUrl;
         this.createdAt = createdAt;
@@ -101,11 +99,30 @@ public class Image {
         this.imageService = imageService;
     }
 
-    public Set<Label> getLabels() {
+    public Set<ImageLabel> getLabels() {
         return labels;
     }
 
-    public void setLabels(Set<Label> labels) {
+    public void setLabels(Set<ImageLabel> labels) {
         this.labels = labels;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Image image = (Image) o;
+        return Double.compare(image.size, size) == 0
+                && Objects.equals(imageId, image.imageId)
+                && Objects.equals(imageUrl, image.imageUrl)
+                && Objects.equals(createdAt, image.createdAt)
+                && Objects.equals(updatedAt, image.updatedAt)
+                && Objects.equals(imageService, image.imageService)
+                && Objects.equals(labels, image.labels);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(imageId, imageUrl, createdAt, updatedAt, size, imageService, labels);
     }
 }

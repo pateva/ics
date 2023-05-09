@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -14,12 +15,12 @@ public class Label {
     @Column(name = "label_description")
     private String labelDescription;
 
-    @ManyToMany(mappedBy = "labels")
-    private Set<Image> images = new HashSet<>();
+    @OneToMany(mappedBy = "label")
+    Set<ImageLabel> images = new HashSet<>();
 
     public Label() {}
 
-    public Label(Long labelId, String labelDescription, Set<Image> images) {
+    public Label(Long labelId, String labelDescription, Set<ImageLabel> images) {
         this.labelId = labelId;
         this.labelDescription = labelDescription;
         this.images = images;
@@ -41,11 +42,26 @@ public class Label {
         this.labelDescription = labelDescription;
     }
 
-    public Set<Image> getImages() {
+    public Set<ImageLabel> getImages() {
         return images;
     }
 
-    public void setImages(Set<Image> images) {
+    public void setImages(Set<ImageLabel> images) {
         this.images = images;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Label label = (Label) o;
+        return Objects.equals(labelId, label.labelId)
+                && Objects.equals(labelDescription, label.labelDescription)
+                && Objects.equals(images, label.images);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(labelId, labelDescription, images);
     }
 }

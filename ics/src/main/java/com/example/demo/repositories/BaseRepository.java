@@ -8,4 +8,5 @@ public abstract class BaseRepository {
         API_URL = "https://api.ximilar.com/classify/v2/classify";
         API_KEY = System.getenv("API_KEY_XIMILAR");
     }
+
 }
