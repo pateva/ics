@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.models;
 
 public record Greeting(long id, String content) {
 
