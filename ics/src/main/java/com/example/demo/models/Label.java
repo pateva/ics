@@ -15,15 +15,15 @@ public class Label {
     @Column(name = "label_description")
     private String labelDescription;
 
-    @OneToMany(mappedBy = "label")
-    Set<ImageLabel> images = new HashSet<>();
+//    @OneToMany(mappedBy = "label")
+//    Set<ImageLabel> images = new HashSet<>();
 
     public Label() {}
 
     public Label(Long labelId, String labelDescription, Set<ImageLabel> images) {
         this.labelId = labelId;
         this.labelDescription = labelDescription;
-        this.images = images;
+        //this.images = images;
     }
 
     public Long getLabelId() {
@@ -42,13 +42,16 @@ public class Label {
         this.labelDescription = labelDescription;
     }
 
-    public Set<ImageLabel> getImages() {
-        return images;
-    }
+//    @ManyToMany(mappedBy = "likedLabels")
+//    Set<Image> images;
 
-    public void setImages(Set<ImageLabel> images) {
-        this.images = images;
-    }
+//    //public Set<ImageLabel> getImages() {
+//        return images;
+//    }
+
+//    public void setImages(Set<ImageLabel> images) {
+//        this.images = images;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -56,12 +59,12 @@ public class Label {
         if (o == null || getClass() != o.getClass()) return false;
         Label label = (Label) o;
         return Objects.equals(labelId, label.labelId)
-                && Objects.equals(labelDescription, label.labelDescription)
-                && Objects.equals(images, label.images);
+                && Objects.equals(labelDescription, label.labelDescription);
+//                && Objects.equals(images, label.images);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(labelId, labelDescription, images);
+        return Objects.hash(labelId, labelDescription); //images);
     }
 }

@@ -11,12 +11,12 @@ public class ImageLabel {
     ImageLabelKey id;
 
     @ManyToOne
-    @MapsId("imageId")
+    @MapsId("image_id")
     @JoinColumn(name = "image_id")
     Image image;
 
     @ManyToOne
-    @MapsId("labelId")
+    @MapsId("label_id")
     @JoinColumn(name = "label_id")
     Label label;
 
