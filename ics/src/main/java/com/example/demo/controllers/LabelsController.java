@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.controllers.dto.LabelDto;
 import com.example.demo.models.Image;
 import com.example.demo.models.Label;
 import com.example.demo.repositories.LabelRepository;
@@ -45,5 +46,17 @@ public class LabelsController {
         BeanUtils.copyProperties(label, existingLabel, "label_id" );
         return labelRepository.saveAndFlush(existingLabel);
 
+    }
+
+    public  Label mapperLabel(LabelDto labelDto) {
+        String labelDescription = labelDto.getName();
+
+        if(labelRepository.existsByLabelDescription(labelDescription)) {
+            return labelRepository.findByLabelDescription(labelDescription);
+        }
+        else {
+            Label label = new Label(labelDescription);
+            return labelRepository.saveAndFlush(label);
+        }
     }
 }

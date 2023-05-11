@@ -24,6 +24,10 @@ public class Label {
 
     public Label() {}
 
+    public Label(String labelDescription) {
+        this.labelDescription = labelDescription;
+    }
+
     public Label(Long labelId, String labelDescription) {
         this.labelId = labelId;
         this.labelDescription = labelDescription;

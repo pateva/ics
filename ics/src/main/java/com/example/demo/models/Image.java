@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
-
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -27,11 +26,14 @@ public class Image {
     @Column(name = "\"updated_at\"")
     private LocalDateTime updatedAt;
 
-    @Column(name = "\"image_size\"")
-    private double size;
+    @Column(name = "\"image_width\"")
+    private double width;
+
+    @Column(name = "\"image_height\"")
+    private double height;
 
     @Column(name = "\"image_service\"")
-    private String imageService;
+    private String imageService = "Ximilar";
 
     @ManyToMany
     @JoinTable(
@@ -42,12 +44,20 @@ public class Image {
 
     public Image() {}
 
-    public Image(Long imageId, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt, double size, String imageService) {
+    public Image(String imageUrl, double width, double height, Set<Label> labels) {
+        this.imageUrl = imageUrl;
+        this.width = width;
+        this.height = height;
+        this.labels = labels;
+    }
+
+    public Image(Long imageId, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt, double width, double height, String imageService) {
         this.imageId = imageId;
         this.imageUrl = imageUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.size = size;
+        this.width = width;
+        this.height = height;
         this.imageService = imageService != null ? imageService : "Ximilar";
     }
 
@@ -83,12 +93,20 @@ public class Image {
         this.updatedAt = updatedAt;
     }
 
-    public double getSize() {
-        return size;
+    public double getWidth() {
+        return width;
     }
 
-    public void setSize(double size) {
-        this.size = size;
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 
     public String getImageService() {
@@ -104,16 +122,11 @@ public class Image {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Image image = (Image) o;
-        return Double.compare(image.size, size) == 0
-                && Objects.equals(imageId, image.imageId)
-                && Objects.equals(imageUrl, image.imageUrl)
-                && Objects.equals(createdAt, image.createdAt)
-                && Objects.equals(updatedAt, image.updatedAt)
-                && Objects.equals(imageService, image.imageService);
+        return Double.compare(image.width, width) == 0 && Double.compare(image.height, height) == 0 && imageId.equals(image.imageId) && imageUrl.equals(image.imageUrl) && createdAt.equals(image.createdAt) && updatedAt.equals(image.updatedAt) && Objects.equals(imageService, image.imageService) && Objects.equals(labels, image.labels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(imageId, imageUrl, createdAt, updatedAt, size, imageService);
+        return Objects.hash(imageId, imageUrl, createdAt, updatedAt, width, height, imageService, labels);
     }
 }
