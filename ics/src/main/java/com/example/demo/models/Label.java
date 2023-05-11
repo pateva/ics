@@ -10,13 +10,13 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "labels")
+@Table(name = "\"labels\"")
 public class Label {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long labelId;
 
-    @Column(name = "label_description")
+    @Column(name = "\"label_description\"")
     private String labelDescription;
 
     @ManyToMany(mappedBy = "labels")

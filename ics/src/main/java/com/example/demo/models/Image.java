@@ -16,28 +16,28 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
-    @Column(name = "image_name")
+    @Column(name = "\"image_name\"")
     private String imageUrl;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "\"created_at\"")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "\"updated_at\"")
     private LocalDateTime updatedAt;
 
-    @Column(name = "image_size")
+    @Column(name = "\"image_size\"")
     private double size;
 
-    @Column(name = "image_service")
+    @Column(name = "\"image_service\"")
     private String imageService;
 
     @ManyToMany
     @JoinTable(
-            name = "image_label",
-            joinColumns = @JoinColumn(name = "image_id"),
-            inverseJoinColumns = @JoinColumn(name = "label_id"))
+            name = "\"image_label\"",
+            joinColumns = @JoinColumn(name = "\"image_id\""),
+            inverseJoinColumns = @JoinColumn(name = "\"label_id\""))
     Set<Label> labels;
 
     public Image() {}
