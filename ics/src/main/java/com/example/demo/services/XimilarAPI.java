@@ -1,13 +1,9 @@
 package com.example.demo.services;
 
 import com.example.demo.controllers.dto.RecognitionRequestBody;
-import com.example.demo.repositories.ImageRepository;
 import com.example.demo.controllers.dto.RecognitionResponseBody;
 import org.springframework.http.*;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Objects;
 
 public class XimilarAPI {
     private static final String API_URL_CLASSIFY = "https://api.ximilar.com/photo/tags/v2/tags";

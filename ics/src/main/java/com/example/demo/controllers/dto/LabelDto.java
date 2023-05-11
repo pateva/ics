@@ -2,7 +2,6 @@ package com.example.demo.controllers.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LabelDto {
     private String name;

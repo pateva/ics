@@ -1,7 +1,6 @@
 package com.example.demo.controllers;
 
 import com.example.demo.controllers.dto.LabelDto;
-import com.example.demo.models.Image;
 import com.example.demo.models.Label;
 import com.example.demo.repositories.LabelRepository;
 import org.springframework.beans.BeanUtils;
