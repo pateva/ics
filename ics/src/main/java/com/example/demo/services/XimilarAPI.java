@@ -17,13 +17,14 @@ public class XimilarAPI {
         ResponseEntity<RecognitionResponseBody> responseEntity;
 
         try {
-            responseEntity = restTemplate.exchange(API_URL_CLASSIFY
+            responseEntity = restTemplate.exchange(
+                    API_URL_CLASSIFY
                     , HttpMethod.POST
                     , requestEntity
                     , RecognitionResponseBody.class);
 
             return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
-        } catch(Exception e) {
+        } catch (Exception e) {
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
