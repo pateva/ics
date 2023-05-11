@@ -1,18 +1,18 @@
 package com.example.demo.models;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "images")
 public class Image {
-    @Id
+    @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
@@ -33,28 +33,22 @@ public class Image {
     @Column(name = "image_service")
     private String imageService;
 
-//    @OneToMany(mappedBy = "image")
-//    Set<ImageLabel> labels = new HashSet<>();
-
-
-
-//    @ManyToMany
-//    @JoinTable(
-//            name = "image_label",
-//            joinColumns = @JoinColumn(name = "image_id"),
-//            inverseJoinColumns = @JoinColumn(name = "label_id"))
-//    Set<Label> likedLabels;
+    @ManyToMany
+    @JoinTable(
+            name = "image_label",
+            joinColumns = @JoinColumn(name = "image_id"),
+            inverseJoinColumns = @JoinColumn(name = "label_id"))
+    Set<Label> labels;
 
     public Image() {}
 
-    public Image(Long imageId, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt, double size, String imageService, Set<ImageLabel> labels) {
+    public Image(Long imageId, String imageUrl, LocalDateTime createdAt, LocalDateTime updatedAt, double size, String imageService) {
         this.imageId = imageId;
         this.imageUrl = imageUrl;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.size = size;
         this.imageService = imageService != null ? imageService : "Ximilar";
-        //this.labels = labels;
     }
 
     public Long getImageId() {
@@ -105,14 +99,6 @@ public class Image {
         this.imageService = imageService;
     }
 
-//    //public Set<ImageLabel> getLabels() {
-//        return labels;
-//    }
-
-//    //public void setLabels(Set<ImageLabel> labels) {
-//        this.labels = labels;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,11 +110,10 @@ public class Image {
                 && Objects.equals(createdAt, image.createdAt)
                 && Objects.equals(updatedAt, image.updatedAt)
                 && Objects.equals(imageService, image.imageService);
-                //&& Objects.equals(labels, image.labels);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(imageId, imageUrl, createdAt, updatedAt, size, imageService); //labels);
+        return Objects.hash(imageId, imageUrl, createdAt, updatedAt, size, imageService);
     }
 }

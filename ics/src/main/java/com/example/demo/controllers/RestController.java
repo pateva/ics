@@ -20,8 +20,8 @@ public class RestController {
     private final String API_URL_CLASSIFY = "https://api.ximilar.com/classify/v2/classify";
     private final String API_KEY = System.getenv("API_KEY_XIMILAR");
 
-    @Autowired
-    private RestTemplate restTemplate;
+
+    private RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping("/")
     public String empty() {
@@ -33,20 +33,20 @@ public class RestController {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
-    @PostMapping("/images")
-    public ResponseEntity<String> classifyImage(@RequestParam("url") String imageUrl) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "Token " + API_KEY);
-
-        JSONObject body = new JSONObject();
-        body.put("url", imageUrl);
-
-        HttpEntity<String> requestEntity = new HttpEntity<>(body.toString(), headers);
-        ResponseEntity<String> responseEntity = restTemplate.exchange(API_URL_CLASSIFY, HttpMethod.POST, requestEntity, String.class);
-
-        return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
-    }
+//    @PostMapping("/images")
+//    public ResponseEntity<String> classifyImage(@RequestParam("url") String imageUrl) {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.set("Authorization", "Token " + API_KEY);
+//
+//        JSONObject body = new JSONObject();
+//        body.put("url", imageUrl);
+//
+//        HttpEntity<String> requestEntity = new HttpEntity<>(body.toString(), headers);
+//        ResponseEntity<String> responseEntity = restTemplate.exchange(API_URL_CLASSIFY, HttpMethod.POST, requestEntity, String.class);
+//
+//        return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
+//    }
 
 }
 

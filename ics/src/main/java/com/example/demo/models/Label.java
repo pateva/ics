@@ -1,6 +1,10 @@
 package com.example.demo.models;
 
-import javax.persistence.*;
+
+
+
+import jakarta.persistence.*;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -15,15 +19,14 @@ public class Label {
     @Column(name = "label_description")
     private String labelDescription;
 
-//    @OneToMany(mappedBy = "label")
-//    Set<ImageLabel> images = new HashSet<>();
+    @ManyToMany(mappedBy = "labels")
+    Set<Image> images;
 
     public Label() {}
 
-    public Label(Long labelId, String labelDescription, Set<ImageLabel> images) {
+    public Label(Long labelId, String labelDescription) {
         this.labelId = labelId;
         this.labelDescription = labelDescription;
-        //this.images = images;
     }
 
     public Long getLabelId() {
@@ -42,17 +45,6 @@ public class Label {
         this.labelDescription = labelDescription;
     }
 
-//    @ManyToMany(mappedBy = "likedLabels")
-//    Set<Image> images;
-
-//    //public Set<ImageLabel> getImages() {
-//        return images;
-//    }
-
-//    public void setImages(Set<ImageLabel> images) {
-//        this.images = images;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,7 +52,6 @@ public class Label {
         Label label = (Label) o;
         return Objects.equals(labelId, label.labelId)
                 && Objects.equals(labelDescription, label.labelDescription);
-//                && Objects.equals(images, label.images);
     }
 
     @Override
