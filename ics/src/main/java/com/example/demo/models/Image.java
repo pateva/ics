@@ -117,6 +117,14 @@ public class Image {
         this.imageService = imageService;
     }
 
+    public Set<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(Set<Label> labels) {
+        this.labels = labels;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
