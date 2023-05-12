@@ -37,7 +37,7 @@ public class ImagesController {
     @GetMapping
     @RequestMapping("/{id}")
     public ResponseEntity<RecognitionResponseBody> getImage(@PathVariable Long id) {
-        if(!imageRepository.existsById(id)) return  ResponseEntity.notFound().build();
+        if (!imageRepository.existsById(id)) return ResponseEntity.notFound().build();
 
         return RecognitionResponseBody.imageToResponce(
                 imageRepository.getReferenceById(id)
@@ -45,17 +45,19 @@ public class ImagesController {
     }
 
     @PostMapping
-    public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body) {
+    public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body
+            , @RequestParam(required = false, defaultValue = "false") boolean noCache) {
+
         if (!body.isValidUrl()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
         }
 
         String url = body.getRecords().get(0).get_url();
         ResponseEntity<RecognitionResponseBody> responseEntity;
 
-        if (imageRepository.existsByImageUrl(url)) {
+        if (imageRepository.existsByImageUrl(url) && !noCache) {
             responseEntity = RecognitionResponseBody.imageToResponce(imageRepository.findByImageUrl(url), HttpStatus.ACCEPTED);
-
         } else {
             responseEntity = XimilarAPI.postApiTagRequestXimilar(body);
             Image image = mapperImage(responseEntity.getBody().getRecords().get(0));
@@ -64,7 +66,11 @@ public class ImagesController {
                 //todo nice to have by logic da poznae image-a, nqma da e ID
             }
 
-            imageRepository.saveAndFlush(image);
+            if(!noCache) imageRepository.saveAndFlush(image);
+            else {
+                updateImage(imageRepository.findByImageUrl(url).getImageId(), url);
+                //todo trqbva da e request body-to
+            }
         }
 
         return responseEntity;
@@ -78,12 +84,13 @@ public class ImagesController {
     }
 
     @RequestMapping(value = {"id"}, method = RequestMethod.PUT)
-    public Image updateImage(@PathVariable Long id, @RequestBody Image image) {
+    public ResponseEntity<RecognitionResponseBody> updateImage(@PathVariable Long id, @RequestBody String url) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Image existingImage = imageRepository.getReferenceById(id);
-        BeanUtils.copyProperties(image, existingImage, "image_id");
-        return imageRepository.saveAndFlush(existingImage);
+        BeanUtils.copyProperties(imageRepository.findByImageUrl(url), existingImage, "image_id");
+        existingImage = imageRepository.saveAndFlush(existingImage);
 
+        return RecognitionResponseBody.imageToResponce(existingImage, HttpStatus.OK);
     }
 
     private Image mapperImage(ResponseRecord response) {
