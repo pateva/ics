@@ -41,16 +41,19 @@ public class ImagesController {
 
     @PostMapping
     public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body) {
-
-        if(!body.isValidUrl()) {
+        if (!body.isValidUrl()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
-        //todo if image already exists in the db based on URL, update and return
-        ResponseEntity<RecognitionResponseBody> responseEntity = XimilarAPI.postApiTagRequestXimilar(body);
+        String url = body.getRecords().get(0).get_url();
+        ResponseEntity<RecognitionResponseBody> responseEntity;
 
-        for (int i = 0; i < Objects.requireNonNull(responseEntity.getBody()).getRecords().size(); i++) {
-            Image image = mapperImage(responseEntity.getBody().getRecords().get(i));
+        if (imageRepository.existsByImageUrl(url)) {
+            responseEntity = RecognitionResponseBody.imageToResponce(imageRepository.findByImageUrl(url), HttpStatus.ACCEPTED);
+
+        } else {
+            responseEntity = XimilarAPI.postApiTagRequestXimilar(body);
+            Image image = mapperImage(responseEntity.getBody().getRecords().get(0));
 
             if (imageRepository.existsById(123L)) {
                 //todo nice to have by logic da poznae image-a, nqma da e ID
@@ -60,6 +63,7 @@ public class ImagesController {
         }
 
         return responseEntity;
+
     }
 
 
