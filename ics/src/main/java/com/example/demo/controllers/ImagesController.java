@@ -14,6 +14,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -34,9 +35,13 @@ public class ImagesController {
     }
 
     @GetMapping
-    @RequestMapping("{id}")
-    public Image getImage(@PathVariable Long id) {
-        return imageRepository.getReferenceById(id);
+    @RequestMapping("/{id}")
+    public ResponseEntity<RecognitionResponseBody> getImage(@PathVariable Long id) {
+        if(!imageRepository.existsById(id)) return  ResponseEntity.notFound().build();
+
+        return RecognitionResponseBody.imageToResponce(
+                imageRepository.getReferenceById(id)
+                , HttpStatus.OK);
     }
 
     @PostMapping
@@ -63,7 +68,6 @@ public class ImagesController {
         }
 
         return responseEntity;
-
     }
 
 
@@ -91,5 +95,4 @@ public class ImagesController {
 
         return new Image(response.get_url(), response.get_width(), response.get_height(), labelSet);
     }
-
 }
