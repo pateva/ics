@@ -55,6 +55,7 @@ public class LabelsController {
         }
         else {
             Label label = new Label(labelDescription);
+
             return labelRepository.saveAndFlush(label);
         }
     }
