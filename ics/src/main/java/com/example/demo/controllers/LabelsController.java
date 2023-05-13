@@ -28,8 +28,16 @@ public class LabelsController {
     }
 
     @PostMapping
-    public Label createLabel(@RequestBody final Label label) {
-        return labelRepository.saveAndFlush(label);
+    public Label createLabel(@RequestBody final LabelDto labelDto) {
+        String labelDescription = labelDto.getName();
+
+        if (labelRepository.existsByLabelDescription(labelDescription)) {
+
+            return labelRepository.findByLabelDescription(labelDescription);
+        } else {
+
+            return labelRepository.saveAndFlush(new Label(labelDescription));
+        }
     }
 
     @RequestMapping(value = {"id"}, method = RequestMethod.DELETE)
@@ -42,21 +50,21 @@ public class LabelsController {
     public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Label existingLabel = labelRepository.getReferenceById(id);
-        BeanUtils.copyProperties(label, existingLabel, "label_id" );
+        BeanUtils.copyProperties(label, existingLabel, "label_id");
         return labelRepository.saveAndFlush(existingLabel);
 
     }
 
-    public  Label mapperLabel(LabelDto labelDto) {
-        String labelDescription = labelDto.getName();
-
-        if(labelRepository.existsByLabelDescription(labelDescription)) {
-            return labelRepository.findByLabelDescription(labelDescription);
-        }
-        else {
-            Label label = new Label(labelDescription);
-
-            return labelRepository.saveAndFlush(label);
-        }
-    }
+//    //todo this could be in a service label
+//    public Label mapperLabel(LabelDto labelDto) {
+//        String labelDescription = labelDto.getName();
+//
+//        if (labelRepository.existsByLabelDescription(labelDescription)) {
+//            return labelRepository.findByLabelDescription(labelDescription);
+//        } else {
+//            Label label = new Label(labelDescription);
+//
+//            return labelRepository.saveAndFlush(label);
+//        }
+//    }
 }

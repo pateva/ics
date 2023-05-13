@@ -15,7 +15,7 @@ public class XimilarAPI {
         headers.set("Authorization", "Token " + API_KEY);
         HttpEntity<RecognitionRequestBody> requestEntity = new HttpEntity<>(body, headers);
         ResponseEntity<RecognitionResponseBody> responseEntity;
-
+        System.out.println();
         try {
             responseEntity = restTemplate.exchange(
                     API_URL_CLASSIFY

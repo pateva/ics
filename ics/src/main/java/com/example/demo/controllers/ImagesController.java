@@ -97,7 +97,8 @@ public class ImagesController {
         Set<Label> labelSet = new HashSet<>();
 
         for (LabelDto label : response.get_tags()) {
-            labelSet.add(labelsController.mapperLabel(label));
+            labelSet.add(labelsController.createLabel(label));
+            //todo this could be in a service
         }
 
         return new Image(response.get_url(), response.get_width(), response.get_height(), labelSet);
