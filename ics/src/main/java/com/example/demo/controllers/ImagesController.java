@@ -74,13 +74,13 @@ public class ImagesController {
     }
 
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.DELETE)
+    @RequestMapping(value = {"/id"}, method = RequestMethod.DELETE)
     public void deleteImage(@PathVariable Long id) {
         //todo children records before deleting
         imageRepository.deleteById(id);
     }
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.PUT)
+    @RequestMapping(value = {"/id"}, method = RequestMethod.PUT)
     public Image updateImage(@PathVariable Long id, @RequestBody Image image) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Image existingImage = imageRepository.getReferenceById(id);
