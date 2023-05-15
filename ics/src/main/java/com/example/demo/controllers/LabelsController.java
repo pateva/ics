@@ -5,6 +5,7 @@ import com.example.demo.models.Label;
 import com.example.demo.repositories.LabelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,13 +35,12 @@ public class LabelsController {
 
     @RequestMapping(value = {"id"}, method = RequestMethod.DELETE)
     public void deleteLabel(@PathVariable Long id) {
-        //todo children records before deleting
         labelRepository.deleteById(id);
     }
 
+    @Validated
     @RequestMapping(value = {"id"}, method = RequestMethod.PUT)
     public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
-        //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Label existingLabel = labelRepository.getReferenceById(id);
         BeanUtils.copyProperties(label, existingLabel, "label_id" );
         return labelRepository.saveAndFlush(existingLabel);

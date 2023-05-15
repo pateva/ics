@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 import java.util.Set;
@@ -12,9 +13,11 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long labelId;
 
+    @NotNull
     @Column(name = "\"label_description\"")
     private String labelDescription;
 
+    @NotNull
     @ManyToMany(mappedBy = "labels")
     Set<Image> images;
 

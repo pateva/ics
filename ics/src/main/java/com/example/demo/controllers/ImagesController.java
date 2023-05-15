@@ -77,7 +77,6 @@ public class ImagesController {
 
     @RequestMapping(value = {"/id"}, method = RequestMethod.DELETE)
     public void deleteImage(@PathVariable Long id) {
-        //todo children records before deleting
         imageRepository.deleteById(id);
     }
 
