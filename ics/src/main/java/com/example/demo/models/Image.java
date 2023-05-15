@@ -129,9 +129,18 @@ public class Image {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+
+            return false;
+        }
+
         Image image = (Image) o;
+
         return Double.compare(image.width, width) == 0 && Double.compare(image.height, height) == 0 && imageId.equals(image.imageId) && imageUrl.equals(image.imageUrl) && createdAt.equals(image.createdAt) && updatedAt.equals(image.updatedAt) && Objects.equals(imageService, image.imageService) && Objects.equals(labels, image.labels);
     }
 

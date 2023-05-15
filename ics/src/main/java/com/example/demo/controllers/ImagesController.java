@@ -37,7 +37,10 @@ public class ImagesController {
     @GetMapping
     @RequestMapping("/{id}")
     public ResponseEntity<RecognitionResponseBody> getImage(@PathVariable Long id) {
-        if(!imageRepository.existsById(id)) return  ResponseEntity.notFound().build();
+        if (!imageRepository.existsById(id)) {
+
+            return ResponseEntity.notFound().build();
+        }
 
         return RecognitionResponseBody.imageToResponce(
                 imageRepository.getReferenceById(id)
