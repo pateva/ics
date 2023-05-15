@@ -7,6 +7,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +18,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
+    @NotNull
     @Column(name = "\"image_name\"")
     private String imageUrl;
 
@@ -28,15 +30,19 @@ public class Image {
     @Column(name = "\"updated_at\"")
     private LocalDateTime updatedAt;
 
+    @NotNull
     @Column(name = "\"image_width\"")
     private double width;
 
+    @NotNull
     @Column(name = "\"image_height\"")
     private double height;
 
+    @NotNull
     @Column(name = "\"image_service\"")
     private String imageService = "Ximilar";
 
+    @NotNull
     @ManyToMany
     @JoinTable(
             name = "\"image_label\"",

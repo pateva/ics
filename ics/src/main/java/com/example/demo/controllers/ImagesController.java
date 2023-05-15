@@ -11,6 +11,7 @@ import com.example.demo.services.XimilarAPI;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -80,9 +81,9 @@ public class ImagesController {
         imageRepository.deleteById(id);
     }
 
+    @Validated
     @RequestMapping(value = {"/id"}, method = RequestMethod.PUT)
     public Image updateImage(@PathVariable Long id, @RequestBody Image image) {
-        //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Image existingImage = imageRepository.getReferenceById(id);
         BeanUtils.copyProperties(image, existingImage, "image_id");
         return imageRepository.saveAndFlush(existingImage);
