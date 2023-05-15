@@ -21,8 +21,7 @@ public class LabelsController {
         return labelRepository.findAll();
     }
 
-    @GetMapping
-    @RequestMapping("{id}")
+    @GetMapping("{id}")
     public Label getLabel(@PathVariable Long id) {
         return labelRepository.getReferenceById(id);
     }
@@ -40,13 +39,13 @@ public class LabelsController {
         }
     }
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.DELETE)
+    @DeleteMapping(value = {"id"})
     public void deleteLabel(@PathVariable Long id) {
         //todo children records before deleting
         labelRepository.deleteById(id);
     }
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.PUT)
+    @PutMapping(value = {"id"})
     public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Label existingLabel = labelRepository.getReferenceById(id);
@@ -55,16 +54,16 @@ public class LabelsController {
 
     }
 
-//    //todo this could be in a service label
-//    public Label mapperLabel(LabelDto labelDto) {
-//        String labelDescription = labelDto.getName();
-//
-//        if (labelRepository.existsByLabelDescription(labelDescription)) {
-//            return labelRepository.findByLabelDescription(labelDescription);
-//        } else {
-//            Label label = new Label(labelDescription);
-//
-//            return labelRepository.saveAndFlush(label);
-//        }
-//    }
+    //todo this could be in a service label
+    public Label mapperLabel(LabelDto labelDto) {
+        String labelDescription = labelDto.getName();
+
+        if (labelRepository.existsByLabelDescription(labelDescription)) {
+            return labelRepository.findByLabelDescription(labelDescription);
+        } else {
+            Label label = new Label(labelDescription);
+
+            return labelRepository.saveAndFlush(label);
+        }
+    }
 }

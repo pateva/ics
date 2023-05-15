@@ -34,8 +34,7 @@ public class ImagesController {
         return imageRepository.findAll();
     }
 
-    @GetMapping
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<RecognitionResponseBody> getImage(@PathVariable Long id) {
         if (!imageRepository.existsById(id)) return ResponseEntity.notFound().build();
 
@@ -77,13 +76,13 @@ public class ImagesController {
     }
 
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.DELETE)
+    @DeleteMapping(value = {"id"})
     public void deleteImage(@PathVariable Long id) {
         //todo children records before deleting
         imageRepository.deleteById(id);
     }
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.PUT)
+    @PutMapping(value = {"id"})
     public ResponseEntity<RecognitionResponseBody> updateImage(@PathVariable Long id, @RequestBody String url) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Image existingImage = imageRepository.getReferenceById(id);
