@@ -5,6 +5,7 @@ import com.example.demo.models.Label;
 import com.example.demo.repositories.LabelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,28 +40,29 @@ public class LabelsController {
         }
     }
 
-    @DeleteMapping(value = {"id"})
+    @DeleteMapping(value = {"/id"})
     public void deleteLabel(@PathVariable Long id) {
         //todo children records before deleting
         labelRepository.deleteById(id);
     }
 
-    @PutMapping(value = {"id"})
+    @Validated
+    @PutMapping(value = {"/id"})
     public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Label existingLabel = labelRepository.getReferenceById(id);
-        BeanUtils.copyProperties(label, existingLabel, "label_id");
+        BeanUtils.copyProperties(label, existingLabel, "label_id" );
         return labelRepository.saveAndFlush(existingLabel);
 
     }
 
-    //todo this could be in a service label
-    public Label mapperLabel(LabelDto labelDto) {
+    public  Label mapperLabel(LabelDto labelDto) {
         String labelDescription = labelDto.getName();
 
-        if (labelRepository.existsByLabelDescription(labelDescription)) {
+        if(labelRepository.existsByLabelDescription(labelDescription)) {
             return labelRepository.findByLabelDescription(labelDescription);
-        } else {
+        }
+        else {
             Label label = new Label(labelDescription);
 
             return labelRepository.saveAndFlush(label);
