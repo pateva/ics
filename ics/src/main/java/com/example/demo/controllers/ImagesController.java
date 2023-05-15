@@ -49,7 +49,8 @@ public class ImagesController {
     }
 
     @PostMapping
-    public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body) {
+    public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body,
+                                                                 @RequestParam(required = false, defaultValue = "false") boolean noCache) {
         if (!body.isValidUrl()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -57,7 +58,7 @@ public class ImagesController {
         String url = body.getRecords().get(0).get_url();
         ResponseEntity<RecognitionResponseBody> responseEntity;
 
-        if (imageRepository.existsByImageUrl(url)) {
+        if (imageRepository.existsByImageUrl(url) && !noCache) {
             responseEntity = RecognitionResponseBody.imageToResponce(imageRepository.findByImageUrl(url), HttpStatus.ACCEPTED);
 
         } else {

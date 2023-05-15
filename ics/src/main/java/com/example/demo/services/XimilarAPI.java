@@ -26,12 +26,13 @@ public class XimilarAPI {
                     , RecognitionResponseBody.class);
 
             return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
-        } catch(HttpClientErrorException.BadRequest e) {
+        } catch (HttpClientErrorException.BadRequest e) {
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (HttpClientErrorException.Unauthorized e) {
 
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
