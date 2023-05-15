@@ -8,6 +8,7 @@ import com.example.demo.models.Image;
 import com.example.demo.models.Label;
 import com.example.demo.repositories.ImageRepository;
 import com.example.demo.services.XimilarAPI;
+import com.google.common.util.concurrent.RateLimiter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -49,23 +50,26 @@ public class ImagesController {
     @PostMapping
     public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body,
                                                                  @RequestParam(required = false, defaultValue = "false") boolean noCache) {
+        RateLimiter rateLimiter = RateLimiter.create(10);
+        ResponseEntity<RecognitionResponseBody> responseEntity;
+
+        if (!rateLimiter.tryAcquire()) {
+
+            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
+        }
+
         if (!body.isValidUrl()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 
         }
 
         String url = body.getRecords().get(0).get_url();
-        ResponseEntity<RecognitionResponseBody> responseEntity;
-
-        System.out.println(noCache + "\n\n\n\n");
 
         if (imageRepository.existsByImageUrl(url) && !noCache) {
             responseEntity = RecognitionResponseBody.imageToResponce(imageRepository.findByImageUrl(url), HttpStatus.ACCEPTED);
-
         } else {
             responseEntity = XimilarAPI.postApiTagRequestXimilar(body);
             Image image = mapperImage(responseEntity.getBody().getRecords().get(0));
-
             if (imageRepository.existsById(123L)) {
                 //todo nice to have by logic da poznae image-a, nqma da e ID
             }
@@ -102,4 +106,5 @@ public class ImagesController {
 
         return new Image(response.get_url(), response.get_width(), response.get_height(), labelSet);
     }
+
 }

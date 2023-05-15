@@ -2,7 +2,6 @@ package com.example.demo.services;
 
 import com.example.demo.controllers.dto.RecognitionRequestBody;
 import com.example.demo.controllers.dto.RecognitionResponseBody;
-import com.example.demo.exceptions.UserNotAuthenticatedException;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +12,7 @@ public class XimilarAPI {
     private static RestTemplate restTemplate = new RestTemplate();
 
     public static ResponseEntity<RecognitionResponseBody> postApiTagRequestXimilar(RecognitionRequestBody body) {
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Token " + API_KEY);
         HttpEntity<RecognitionRequestBody> requestEntity = new HttpEntity<>(body, headers);
