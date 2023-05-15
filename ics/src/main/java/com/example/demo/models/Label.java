@@ -1,6 +1,8 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,13 +13,16 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long labelId;
 
+    @NotNull
     @Column(name = "\"label_description\"")
     private String labelDescription;
 
+    @NotNull
     @ManyToMany(mappedBy = "labels")
     Set<Image> images;
 
-    public Label() {}
+    public Label() {
+    }
 
     public Label(String labelDescription) {
         this.labelDescription = labelDescription;
@@ -46,11 +51,18 @@ public class Label {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         Label label = (Label) o;
+
         return Objects.equals(labelId, label.labelId)
-                && Objects.equals(labelDescription, label.labelDescription);
+                        && Objects.equals(labelDescription, label.labelDescription);
     }
 
     @Override

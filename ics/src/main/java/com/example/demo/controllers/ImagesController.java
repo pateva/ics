@@ -34,10 +34,12 @@ public class ImagesController {
         return imageRepository.findAll();
     }
 
-    @GetMapping
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<RecognitionResponseBody> getImage(@PathVariable Long id) {
-        if(!imageRepository.existsById(id)) return  ResponseEntity.notFound().build();
+        if (!imageRepository.existsById(id)) {
+
+            return ResponseEntity.notFound().build();
+        }
 
         return RecognitionResponseBody.imageToResponce(
                 imageRepository.getReferenceById(id)
@@ -45,15 +47,19 @@ public class ImagesController {
     }
 
     @PostMapping
-    public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body) {
+    public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body,
+                                                                 @RequestParam(required = false, defaultValue = "false") boolean noCache) {
         if (!body.isValidUrl()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+
         }
 
         String url = body.getRecords().get(0).get_url();
         ResponseEntity<RecognitionResponseBody> responseEntity;
 
-        if (imageRepository.existsByImageUrl(url)) {
+        System.out.println(noCache + "\n\n\n\n");
+
+        if (imageRepository.existsByImageUrl(url) && !noCache) {
             responseEntity = RecognitionResponseBody.imageToResponce(imageRepository.findByImageUrl(url), HttpStatus.ACCEPTED);
 
         } else {
@@ -71,19 +77,20 @@ public class ImagesController {
     }
 
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.DELETE)
+    @DeleteMapping(value = {"/id"})
     public void deleteImage(@PathVariable Long id) {
         //todo children records before deleting
         imageRepository.deleteById(id);
     }
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.PUT)
-    public Image updateImage(@PathVariable Long id, @RequestBody Image image) {
+    @PutMapping(value = {"/id"})
+    public ResponseEntity<RecognitionResponseBody> updateImage(@PathVariable Long id, @RequestBody String url) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Image existingImage = imageRepository.getReferenceById(id);
-        BeanUtils.copyProperties(image, existingImage, "image_id");
-        return imageRepository.saveAndFlush(existingImage);
+        BeanUtils.copyProperties(imageRepository.findByImageUrl(url), existingImage, "image_id");
+        existingImage = imageRepository.saveAndFlush(existingImage);
 
+        return RecognitionResponseBody.imageToResponce(existingImage, HttpStatus.OK);
     }
 
     private Image mapperImage(ResponseRecord response) {

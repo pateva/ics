@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface ImageRepository extends JpaRepository<Image, Long> {
     boolean existsByImageUrl(String imageUrl);
     Image findByImageUrl(String imageUrl);
-    //Image findById(Long imageId);
 }
