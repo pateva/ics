@@ -57,8 +57,6 @@ public class ImagesController {
         String url = body.getRecords().get(0).get_url();
         ResponseEntity<RecognitionResponseBody> responseEntity;
 
-        System.out.println(noCache + "\n\n\n\n");
-
         if (imageRepository.existsByImageUrl(url) && !noCache) {
             responseEntity = RecognitionResponseBody.imageToResponce(imageRepository.findByImageUrl(url), HttpStatus.ACCEPTED);
 
