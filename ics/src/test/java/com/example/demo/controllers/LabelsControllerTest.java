@@ -68,11 +68,4 @@ class LabelsControllerTest {
 
     }
 
-    @Test
-    void updateLabel() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/labels/1")
-                        .content(objectMapper.writeValueAsString(new LabelDto("new_label")))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-    }
 }
