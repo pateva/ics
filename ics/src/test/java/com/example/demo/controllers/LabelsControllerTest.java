@@ -6,7 +6,6 @@ import com.example.demo.repositories.LabelRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,18 +16,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-
 
 @WebMvcTest(LabelsController.class)
 @ExtendWith(SpringExtension.class)
 class LabelsControllerTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-
-    @MockBean
-    private LabelsController controller;
 
     @MockBean
     private LabelRepository labelRepository;
@@ -71,7 +64,7 @@ class LabelsControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        //Mockito.verify(labelRepository).findByLabelDescription("vector");
+        Mockito.verify(labelRepository).findByLabelDescription("vector");
 
     }
 
