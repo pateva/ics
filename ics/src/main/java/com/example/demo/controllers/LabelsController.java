@@ -18,7 +18,7 @@ public class LabelsController {
     private LabelRepository labelRepository;
 
     @GetMapping
-    public List<Label> listImages() {
+    public List<Label> listLabels() {
         return labelRepository.findAll();
     }
 
