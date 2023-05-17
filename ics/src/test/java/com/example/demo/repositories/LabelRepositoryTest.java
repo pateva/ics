@@ -3,17 +3,16 @@ package com.example.demo.repositories;
 import com.example.demo.models.Label;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = LabelRepository.class)
 class LabelRepositoryTest {
 
-    @Autowired
+    @Mock
     private LabelRepository labelRepository;
 
     @Test
