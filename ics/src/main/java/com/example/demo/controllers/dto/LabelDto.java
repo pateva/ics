@@ -21,9 +21,4 @@ public class LabelDto {
     public void setName(String name) {
         this.name = name;
     }
-
-    public static String asJsonString(Object obj) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(obj);
-    }
 }

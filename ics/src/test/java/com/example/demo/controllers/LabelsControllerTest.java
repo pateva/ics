@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static com.example.demo.controllers.dto.LabelDto.asJsonString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
@@ -53,28 +52,34 @@ class LabelsControllerTest {
     }
 
     @Test
-    void createLabel() throws Exception {
+    void createLabel_labelDoesNotExist_returnNewLabel() throws Exception {
+        Mockito.when(labelRepository.existsByLabelDescription("vector")).thenReturn(false);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/labels")
                         .content(objectMapper.writeValueAsString(new LabelDto("vector")))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.when(labelRepository.existsByLabelDescription("vector")).thenReturn(false);
-        Mockito.when(labelRepository.saveAndFlush(any(Label.class))).thenReturn(new Label("vector"));
+        Mockito.verify(labelRepository).saveAndFlush(new Label("vector"));
+    }
+
+    @Test
+    void createLabel_labelAlreadyExist_returnExistingLabel() throws Exception {
+        Mockito.when(labelRepository.existsByLabelDescription("vector")).thenReturn(true);
+        mockMvc.perform(MockMvcRequestBuilders.post("/labels")
+                        .content(objectMapper.writeValueAsString(new LabelDto("vector")))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        //Mockito.verify(labelRepository).findByLabelDescription("vector");
 
     }
 
     @Test
     void updateLabel() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("/labels/1")
-                        .content(objectMapper.writeValueAsString(new LabelDto("vector")))
+                        .content(objectMapper.writeValueAsString(new LabelDto("new_label")))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-
-        Mockito.when(labelRepository.existsByLabelDescription("vector")).thenReturn(false);
-        Mockito.when(labelRepository.saveAndFlush(any(Label.class))).thenReturn(new Label("vector"));
-
     }
-
-
 }
