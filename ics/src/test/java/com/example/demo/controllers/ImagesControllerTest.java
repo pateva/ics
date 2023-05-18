@@ -46,24 +46,24 @@ class ImagesControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/images/6")).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
-//    @Test
-//    void getSingleImage_imageDoesExist_ReturnOk() throws Exception {
-//        Mockito.when(imageRepository.existsById(6L)).thenReturn(true);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.get("/images/6")).andExpect(MockMvcResultMatchers.status().isNotFound());
-//    }
+    @Test
+    void getSingleImage_imageDoesExist_ReturnOk() throws Exception {
+        Mockito.when(imageRepository.existsById(6L)).thenReturn(true);
 
-//    @Test
-//    void createImage_ImageDoesNotExist_returnNewImage() throws Exception {
-//        Mockito.when(imageRepository.existsByImageUrl("random")).thenReturn(false);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.post("/images")
-//                        .content(objectMapper.writeValueAsString(new LabelDto("random")))
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//        Mockito.verify(imageRepository).saveAndFlush(new Image());
-//    }
+        mockMvc.perform(MockMvcRequestBuilders.get("/images/6")).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void createImage_ImageDoesNotExist_returnNewImage() throws Exception {
+        Mockito.when(imageRepository.existsByImageUrl("random")).thenReturn(false);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/images")
+                        .content(objectMapper.writeValueAsString(new LabelDto("random")))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        Mockito.verify(imageRepository).saveAndFlush(new Image());
+    }
 //
 //    @Test
 //    void deleteImage() {
