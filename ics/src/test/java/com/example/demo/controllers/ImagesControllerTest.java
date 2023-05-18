@@ -39,9 +39,18 @@ class ImagesControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/images")).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+    @Test
+    void getSingleImage_labelDoesNotExist_ReturnNotFound() throws Exception {
+        Mockito.when(imageRepository.existsById(6L)).thenReturn(false);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/images/6")).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
 //    @Test
-//    void getImage() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.get("/images/6")).andExpect(MockMvcResultMatchers.status().isOk());
+//    void getSingleImage_labelDoesExist_ReturnOk() throws Exception {
+//        Mockito.when(imageRepository.existsById(6L)).thenReturn(true);
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get("/images/6")).andExpect(MockMvcResultMatchers.status().isNotFound());
 //    }
 
 //    @Test
