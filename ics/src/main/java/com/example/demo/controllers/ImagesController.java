@@ -29,8 +29,12 @@ public class ImagesController {
     private LabelsController labelsController;
 
     @GetMapping
-    public List<Image> listImages() {
-        return imageRepository.findAll();
+    public List<Image> listImages(@RequestParam(required = false) List<String> labels) {
+        if (labels == null) {
+            return imageRepository.findAll();
+        } else {
+            return imageRepository.findImagesByLabels(labels);
+        }
     }
 
     @GetMapping("/{id}")
