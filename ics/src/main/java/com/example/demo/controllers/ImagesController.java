@@ -34,20 +34,18 @@ public class ImagesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RecognitionResponseBody> getImage(@PathVariable Long id) {
+    public ResponseEntity<Image> getImage(@PathVariable Long id) {
         if (!imageRepository.existsById(id)) {
 
             return ResponseEntity.notFound().build();
         }
 
-        return RecognitionResponseBody.imageToResponce(
-                imageRepository.getReferenceById(id)
-                , HttpStatus.OK);
+        return new ResponseEntity<>(imageRepository.getReferenceById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<RecognitionResponseBody> classifyImage(@RequestBody RecognitionRequestBody body,
-                                                                 @RequestParam(required = false, defaultValue = "false") boolean noCache) {
+    public ResponseEntity<Image> classifyImage(@RequestBody RecognitionRequestBody body,
+                                               @RequestParam(required = false, defaultValue = "false") boolean noCache) {
         RateLimiter rateLimiter = RateLimiter.create(10);
         ResponseEntity<RecognitionResponseBody> responseEntity;
 
@@ -64,7 +62,10 @@ public class ImagesController {
         String url = body.getRecords().get(0).get_url();
 
         if (imageRepository.existsByImageUrl(url) && !noCache) {
-            responseEntity = RecognitionResponseBody.imageToResponce(imageRepository.findByImageUrl(url), HttpStatus.ACCEPTED);
+            Image image = imageRepository.findByImageUrl(url);
+
+            return new ResponseEntity<>(image, HttpStatus.ACCEPTED);
+
         } else {
             responseEntity = XimilarAPI.postApiTagRequestXimilar(body);
             Image image = mapperImage(responseEntity.getBody().getRecords().get(0));
@@ -73,26 +74,24 @@ public class ImagesController {
             }
 
             imageRepository.saveAndFlush(image);
-        }
 
-        return responseEntity;
+            return new ResponseEntity<>(image, HttpStatus.OK);
+        }
     }
 
 
     @DeleteMapping(value = {"/id"})
     public void deleteImage(@PathVariable Long id) {
-        //todo children records before deleting
         imageRepository.deleteById(id);
     }
 
     @PutMapping(value = {"/id"})
-    public ResponseEntity<RecognitionResponseBody> updateImage(@PathVariable Long id, @RequestBody String url) {
-        //todo add validation that all attributes are passed in, otherwise return 400 bad playload
+    public ResponseEntity<Image> updateImage(@PathVariable Long id, @RequestBody String url) {
         Image existingImage = imageRepository.getReferenceById(id);
         BeanUtils.copyProperties(imageRepository.findByImageUrl(url), existingImage, "image_id");
         existingImage = imageRepository.saveAndFlush(existingImage);
 
-        return RecognitionResponseBody.imageToResponce(existingImage, HttpStatus.OK);
+        return new ResponseEntity<>(existingImage, HttpStatus.OK);
     }
 
     private Image mapperImage(ResponseRecord response) {
