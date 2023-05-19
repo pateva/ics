@@ -22,11 +22,15 @@ import java.util.Set;
 @RestController
 @RequestMapping("/images")
 public class ImagesController {
-    @Autowired
+
     private ImageRepository imageRepository;
+    private LabelsController labelsController;
 
     @Autowired
-    private LabelsController labelsController;
+    public ImagesController(ImageRepository imageRepository, LabelsController labelsController) {
+        this.imageRepository = imageRepository;
+        this.labelsController = labelsController;
+    }
 
     @GetMapping
     public List<Image> listImages() {
