@@ -3,7 +3,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.controllers.dto.RecognitionRequestBody;
 import com.example.demo.controllers.dto.URL;
-import com.example.demo.models.Image;
 import com.example.demo.repositories.ImageRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -37,7 +36,6 @@ class ImagesControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
 
     @Test
     void listImages() throws Exception {

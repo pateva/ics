@@ -14,8 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/labels")
 public class LabelsController {
-    @Autowired
     private LabelRepository labelRepository;
+    @Autowired
+    public LabelsController(LabelRepository labelRepository) {
+        this.labelRepository = labelRepository;
+    }
 
     @GetMapping
     public List<Label> listLabels() {
