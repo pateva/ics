@@ -24,14 +24,11 @@ import java.util.Set;
 public class ImagesController {
 
     private ImageRepository imageRepository;
-    @Autowired
-    public ImagesController(ImageRepository imageRepository) {
-        this.imageRepository = imageRepository;
-    }
-
     private LabelsController labelsController;
+
     @Autowired
-    public ImagesController(LabelsController labelsController) {
+    public ImagesController(ImageRepository imageRepository, LabelsController labelsController) {
+        this.imageRepository = imageRepository;
         this.labelsController = labelsController;
     }
 
