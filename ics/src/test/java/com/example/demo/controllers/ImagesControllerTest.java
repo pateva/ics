@@ -76,6 +76,22 @@ class ImagesControllerTest {
     }
 
     @Test
+    void createImage_InvalidUrl_returnError() throws Exception {
+        String url = "invalid_url";
+        URL urlOb = new URL(url);
+        List<URL> list = new ArrayList<>();
+        list.add(urlOb);
+        RecognitionRequestBody body = new RecognitionRequestBody(list);
+        Mockito.when(imageRepository.existsByImageUrl(url)).thenReturn(false);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/images")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(body))
+                        .param("noCache", "false"))
+                .andExpect(MockMvcResultMatchers.status().isInternalServerError());
+    }
+
+    @Test
     void deleteImage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/images/6")).andExpect(MockMvcResultMatchers.status().isOk());
     }
