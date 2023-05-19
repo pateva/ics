@@ -61,7 +61,7 @@ class ImagesControllerTest {
 
     @Test
     void createImage_ImageDoesExist_returnOk() throws Exception {
-        String url = "random";
+        String url = "http://random.jpg";
         URL urlOb = new URL(url);
         List<URL> list = new ArrayList<>();
         list.add(urlOb);
@@ -72,7 +72,7 @@ class ImagesControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(body))
                         .param("noCache", "false"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isAccepted());
     }
 
     @Test
