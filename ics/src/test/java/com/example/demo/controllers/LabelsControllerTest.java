@@ -65,7 +65,6 @@ class LabelsControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
         Mockito.verify(labelRepository).findByLabelDescription("vector");
-
     }
 
 }

@@ -45,7 +45,7 @@ public class LabelsController {
         labelRepository.deleteById(id);
     }
 
-    @Validated
+    //@Validated
     @PutMapping(value = {"/{id}"})
     public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload

@@ -1,22 +1,19 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.controllers.dto.LabelDto;
-import com.example.demo.models.Image;
-import com.example.demo.models.Label;
 import com.example.demo.repositories.ImageRepository;
-import com.example.demo.repositories.LabelRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.MockBean;;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
 
 @WebMvcTest(ImagesController.class)
 @ExtendWith(SpringExtension.class)
@@ -28,6 +25,9 @@ class ImagesControllerTest {
 
     @MockBean
     private LabelsController labelsController;
+
+    @MockBean
+    private ImagesController imagesController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -69,10 +69,30 @@ class ImagesControllerTest {
     void deleteImage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/images/6")).andExpect(MockMvcResultMatchers.status().isOk());
     }
-//
+}
+
 //    @Test
-//    void updateImage() {
+//    void updateImage() throws Exception {
+//        // Arrange
+//        Long id = 1L;
+//        String url = "http://example.com/image.jpg";
+//        Image existingImage = new Image();
+//        existingImage.setImageId(id);
+//        existingImage.setImageUrl(url);
+//
+//        Image updatedImage = new Image();
+//        updatedImage.setImageId(id);
+//        updatedImage.setImageUrl(url + "_updated");
+//
+//        Mockito.when(imageRepository.getReferenceById(id)).thenReturn(existingImage);
+//        Mockito.when(imageRepository.findByImageUrl(url)).thenReturn(updatedImage);
+//        Mockito.when(imageRepository.saveAndFlush(any(Image.class))).thenReturn(updatedImage);
+//
+//        // Act
+//        ResponseEntity<Image> response = imagesController.updateImage(id, url);
+//
+//        // Ass
+//        assertEquals(HttpStatus.OK, response.getStatusCode());
 //    }
 
 
-}
