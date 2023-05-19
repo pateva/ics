@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -52,9 +51,9 @@ class ImagesControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/images/6")).andExpect(MockMvcResultMatchers.status().isOk());
     }
-}
 
-//    @Test
+
+    //    @Test
 //    void createImage_ImageDoesNotExist_returnNewImage() throws Exception {
 //        Mockito.when(imageRepository.existsByImageUrl("random")).thenReturn(false);
 //
@@ -64,13 +63,16 @@ class ImagesControllerTest {
 //                .andExpect(MockMvcResultMatchers.status().isOk());
 //
 //        Mockito.verify(imageRepository).saveAndFlush(new Image());
-  //  }
+    //  }
 //
-//    @Test
-//    void deleteImage() {
-//    }
+    @Test
+    void deleteImage() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/images/6")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
 //
 //    @Test
 //    void updateImage() {
 //    }
-//}
+
+
+}

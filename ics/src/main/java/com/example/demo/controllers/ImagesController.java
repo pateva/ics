@@ -80,12 +80,12 @@ public class ImagesController {
     }
 
 
-    @DeleteMapping(value = {"/id"})
+    @DeleteMapping(value = {"/{id}"})
     public void deleteImage(@PathVariable Long id) {
         imageRepository.deleteById(id);
     }
 
-    @PutMapping(value = {"/id"})
+    @PutMapping(value = {"/{id}"})
     public ResponseEntity<Image> updateImage(@PathVariable Long id, @RequestBody String url) {
         Image existingImage = imageRepository.getReferenceById(id);
         BeanUtils.copyProperties(imageRepository.findByImageUrl(url), existingImage, "image_id");
