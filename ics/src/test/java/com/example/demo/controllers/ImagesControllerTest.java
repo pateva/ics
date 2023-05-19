@@ -1,6 +1,9 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.controllers.dto.RecognitionRequestBody;
+import com.example.demo.controllers.dto.URL;
+import com.example.demo.models.Image;
 import com.example.demo.repositories.ImageRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -9,10 +12,16 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.web.servlet.function.RequestPredicates.param;
 
 
 @WebMvcTest(ImagesController.class)
@@ -25,9 +34,6 @@ class ImagesControllerTest {
 
     @MockBean
     private LabelsController labelsController;
-
-    @MockBean
-    private ImagesController imagesController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -53,46 +59,25 @@ class ImagesControllerTest {
     }
 
 
-    //    @Test
-//    void createImage_ImageDoesNotExist_returnNewImage() throws Exception {
-//        Mockito.when(imageRepository.existsByImageUrl("random")).thenReturn(false);
-//
-//        mockMvc.perform(MockMvcRequestBuilders.get("/images")
-//                        .content(objectMapper.writeValueAsString(new LabelDto("random")))
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//        Mockito.verify(imageRepository).saveAndFlush(new Image());
-    //  }
-//
+    @Test
+    void createImage_ImageDoesExist_returnOk() throws Exception {
+        String url = "random";
+        URL urlOb = new URL(url);
+        List<URL> list = new ArrayList<>();
+        list.add(urlOb);
+        RecognitionRequestBody body = new RecognitionRequestBody(list);
+        Mockito.when(imageRepository.existsByImageUrl(url)).thenReturn(true);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/images")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(body))
+                        .param("noCache", "false"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
     @Test
     void deleteImage() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/images/6")).andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
-
-//    @Test
-//    void updateImage() throws Exception {
-//        // Arrange
-//        Long id = 1L;
-//        String url = "http://example.com/image.jpg";
-//        Image existingImage = new Image();
-//        existingImage.setImageId(id);
-//        existingImage.setImageUrl(url);
-//
-//        Image updatedImage = new Image();
-//        updatedImage.setImageId(id);
-//        updatedImage.setImageUrl(url + "_updated");
-//
-//        Mockito.when(imageRepository.getReferenceById(id)).thenReturn(existingImage);
-//        Mockito.when(imageRepository.findByImageUrl(url)).thenReturn(updatedImage);
-//        Mockito.when(imageRepository.saveAndFlush(any(Image.class))).thenReturn(updatedImage);
-//
-//        // Act
-//        ResponseEntity<Image> response = imagesController.updateImage(id, url);
-//
-//        // Ass
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//    }
-
 
