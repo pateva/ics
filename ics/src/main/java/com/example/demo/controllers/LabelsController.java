@@ -18,11 +18,11 @@ public class LabelsController {
     private LabelRepository labelRepository;
 
     @GetMapping
-    public List<Label> listImages() {
+    public List<Label> listLabels() {
         return labelRepository.findAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Label getLabel(@PathVariable Long id) {
         return labelRepository.getReferenceById(id);
     }
@@ -40,14 +40,13 @@ public class LabelsController {
         }
     }
 
-    @DeleteMapping(value = {"/id"})
+    @DeleteMapping(value = {"/{id}"})
     public void deleteLabel(@PathVariable Long id) {
-        //todo children records before deleting
         labelRepository.deleteById(id);
     }
 
-    @Validated
-    @PutMapping(value = {"/id"})
+    //@Validated
+    @PutMapping(value = {"/{id}"})
     public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Label existingLabel = labelRepository.getReferenceById(id);

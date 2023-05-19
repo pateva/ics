@@ -13,11 +13,9 @@ public class Label {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long labelId;
 
-    @NotNull
     @Column(name = "\"label_description\"")
     private String labelDescription;
 
-    @NotNull
     @ManyToMany(mappedBy = "labels")
     Set<Image> images;
 

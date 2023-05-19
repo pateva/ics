@@ -50,5 +50,13 @@ public class RecognitionRequestBody {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "RecognitionRequestBody{" +
+                "records=" + records +
+                ", task_id=" + task_id +
+                '}';
+    }
 }
 

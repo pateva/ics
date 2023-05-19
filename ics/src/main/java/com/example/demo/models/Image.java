@@ -18,7 +18,6 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long imageId;
 
-    @NotNull
     @Column(name = "\"image_name\"")
     private String imageUrl;
 
@@ -30,19 +29,15 @@ public class Image {
     @Column(name = "\"updated_at\"")
     private LocalDateTime updatedAt;
 
-    @NotNull
     @Column(name = "\"image_width\"")
     private double width;
 
-    @NotNull
     @Column(name = "\"image_height\"")
     private double height;
 
-    @NotNull
     @Column(name = "\"image_service\"")
     private String imageService = "Ximilar";
 
-    @NotNull
     @ManyToMany
     @JoinTable(
             name = "\"image_label\"",
