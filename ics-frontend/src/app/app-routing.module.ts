@@ -8,7 +8,8 @@ const routes: Routes = [
   {path: 'gallery', component: GalleryComponent},
   {path: 'image-classification', component: ImageClassificationComponent},
   {path: 'image-classification/:id', component: SingleImagePageComponent},
-  {path: '', redirectTo: 'image-classification', pathMatch: 'full'}
+  {path: '', redirectTo: 'image-classification', pathMatch: 'full'},
+  {path: '**', redirectTo: 'image-classification', pathMatch: 'full'}
 ];
 
 @NgModule({
