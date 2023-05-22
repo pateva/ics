@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -117,11 +120,28 @@ public class Image {
         this.imageService = imageService;
     }
 
+    public Set<Label> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(Set<Label> labels) {
+        this.labels = labels;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+
+            return false;
+        }
+
         Image image = (Image) o;
+
         return Double.compare(image.width, width) == 0 && Double.compare(image.height, height) == 0 && imageId.equals(image.imageId) && imageUrl.equals(image.imageUrl) && createdAt.equals(image.createdAt) && updatedAt.equals(image.updatedAt) && Objects.equals(imageService, image.imageService) && Objects.equals(labels, image.labels);
     }
 

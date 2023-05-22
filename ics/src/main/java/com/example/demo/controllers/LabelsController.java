@@ -5,6 +5,7 @@ import com.example.demo.models.Label;
 import com.example.demo.repositories.LabelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,32 +14,42 @@ import java.util.List;
 @RestController
 @RequestMapping("/labels")
 public class LabelsController {
-    @Autowired
     private LabelRepository labelRepository;
-
-    @GetMapping
-    public List<Label> listImages() {
-        return labelRepository.findAll();
+    @Autowired
+    public LabelsController(LabelRepository labelRepository) {
+        this.labelRepository = labelRepository;
     }
 
     @GetMapping
-    @RequestMapping("{id}")
+    public List<Label> listLabels() {
+        return labelRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
     public Label getLabel(@PathVariable Long id) {
         return labelRepository.getReferenceById(id);
     }
 
     @PostMapping
-    public Label createLabel(@RequestBody final Label label) {
-        return labelRepository.saveAndFlush(label);
+    public Label createLabel(@RequestBody final LabelDto labelDto) {
+        String labelDescription = labelDto.getName();
+
+        if (labelRepository.existsByLabelDescription(labelDescription)) {
+
+            return labelRepository.findByLabelDescription(labelDescription);
+        } else {
+
+            return labelRepository.saveAndFlush(new Label(labelDescription));
+        }
     }
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.DELETE)
+    @DeleteMapping(value = {"/{id}"})
     public void deleteLabel(@PathVariable Long id) {
-        //todo children records before deleting
         labelRepository.deleteById(id);
     }
 
-    @RequestMapping(value = {"id"}, method = RequestMethod.PUT)
+    //@Validated
+    @PutMapping(value = {"/{id}"})
     public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
         //todo add validation that all attributes are passed in, otherwise return 400 bad playload
         Label existingLabel = labelRepository.getReferenceById(id);

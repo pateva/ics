@@ -17,4 +17,11 @@ public class URL {
     public void set_url(String _url) {
         this._url = _url;
     }
+
+    @Override
+    public String toString() {
+        return "URL{" +
+                "_url='" + _url + '\'' +
+                '}';
+    }
 }
