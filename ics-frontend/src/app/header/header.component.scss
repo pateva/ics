@@ -1,0 +1,25 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  .spacer-right {
+    margin-right: 40px; 
+  }
+   
+  .header-right {
+    overflow: hidden;
+    padding: 20px 10px;
+    float: right;
+    display: flex;
+    align-items: center;
+  }
+
+  .mat-toolbar-row a{
+    text-decoration: none; 
+  }
+
+
+  .mat-toolbar-row .header-right a:hover{
+    padding: 10px 20px; /* Increase the padding */
+    background-color: rgb(136, 131, 131);
+  }
