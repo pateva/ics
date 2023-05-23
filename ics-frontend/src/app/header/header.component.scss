@@ -1,0 +1,16 @@
+  .header-right {
+    overflow: hidden;
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    gap:30px;
+  }
+
+  .mat-toolbar-row {
+  display: flex;
+  justify-content: space-between;
+      
+  a{
+    text-decoration: none; 
+  }
+}
