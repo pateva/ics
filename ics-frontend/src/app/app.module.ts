@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { ImageClassificationComponent } from './image-classification/image-classification.component';
 import { SingleImagePageComponent } from './single-image-page/single-image-page.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { GalleryComponent } from './gallery/gallery.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
