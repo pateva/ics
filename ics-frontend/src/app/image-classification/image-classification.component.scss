@@ -1,0 +1,19 @@
+.example-form-field {
+    width: 40vw;
+    text-align: left;
+  }
+  
+.background {
+    height: 100vh;  
+    width: 100vw;
+    background-color: #3a3b40;
+    display: grid;
+    place-items: center;
+    
+}
+
+.input-url{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
