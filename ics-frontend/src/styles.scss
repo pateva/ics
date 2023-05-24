@@ -3,16 +3,25 @@
 
 @include mat.core();
 
+
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((
  color: (
-   primary: mat.define-palette(mat.$grey-palette),
-   accent: mat.define-palette(mat.$blue-grey-palette),
+   primary: mat.define-palette(mat.$grey-palette,700, 400, 900),
+   accent: mat.define-palette(mat.$blue-grey-palette, 800, 700, 900),
  ),
   // Only include `typography` and `density` in the default dark theme.
-  typography: mat.define-typography-config(),
+  typography: mat.define-typography-config(
+  
+  ),
   density: 0
 ));
+
+.mat-toolbar,
+.mat-toolbar-row,
+.mat-toolbar-row a {
+  color: white; // Set the desired font color here
+}
 
 // Define a light theme
 $light-theme: mat.define-light-theme((
@@ -34,4 +43,9 @@ $light-theme: mat.define-light-theme((
  @include mat.core-color($light-theme);
  @include mat.button-color($light-theme);
  @include mat.all-component-themes($light-theme);
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
