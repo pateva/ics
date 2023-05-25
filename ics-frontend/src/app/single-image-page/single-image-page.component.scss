@@ -1,12 +1,18 @@
 .container {
-    
+  place-items: center;
+  display: grid;
+  height: calc(100% - 80px);
 }
 
 .card {
     max-width: 500px;
+    display: flex;
+    
   }
   
   .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
+
+
