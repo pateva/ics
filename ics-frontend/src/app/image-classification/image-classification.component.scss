@@ -2,15 +2,13 @@
     width: 40vw;
     text-align: left;
   }
-  
-.background {
-    height: 100vh;  
-    width: 100vw;
-    background-color: #3a3b40;
-    display: grid;
+
+  .content-container {
     place-items: center;
-    
-}
+    display: grid;
+    height: calc(100% - 80px);
+  }
+  
 
 .input-url{
   display: flex;

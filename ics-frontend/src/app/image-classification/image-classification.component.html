@@ -1,12 +1,13 @@
-<div class="background">
-    <div class="input-url">
+<div class="content-container">
+<div class="input-url">
 <mat-form-field class="example-form-field">
     <mat-label>Paste an URL of the image here</mat-label>
     <input matInput type="text" [(ngModel)]="value">
+    <!-- regex for later: required pattern="[http:\/\/]|[https:\/\/]?w{3}[.][a-zA-Z]{3,}[.][a-zA-Z]{3}" -->
     <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
       <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>
 <button mat-button color="primary">Analyze</button>
-    </div>
+</div>
 </div>
