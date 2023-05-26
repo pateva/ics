@@ -29,12 +29,6 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule, 
-    FormsModule, 
-    NgIf, 
-    MatButtonModule, 
-    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
