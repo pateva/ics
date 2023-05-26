@@ -8,9 +8,7 @@ import { SingleImagePageComponent } from './single-image-page/single-image-page.
 import { GalleryComponent } from './gallery/gallery.component';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -24,8 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
