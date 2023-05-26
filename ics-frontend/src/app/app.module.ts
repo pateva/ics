@@ -24,11 +24,18 @@ import {FormsModule} from '@angular/forms';
     SingleImagePageComponent,
     GalleryComponent,
     HeaderComponent,
+   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    NgIf,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
