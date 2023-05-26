@@ -17,11 +17,11 @@ $dark-theme: mat.define-dark-theme((
   density: 0
 ));
 
-.mat-toolbar,
-.mat-toolbar-row,
-.mat-toolbar-row a {
-  color: white; // Set the desired font color here
-}
+// .mat-toolbar,
+// .mat-toolbar-row,
+// .mat-toolbar-row a {
+//   color: white; // Set the desired font color here
+// }
 
 // Define a light theme
 $light-theme: mat.define-light-theme((
