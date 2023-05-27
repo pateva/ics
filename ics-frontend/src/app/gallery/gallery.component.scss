@@ -30,7 +30,6 @@
     grid-template-columns: auto auto auto;
     flex-wrap: wrap;
     gap:2%;
-    
   }
 
   .gallery-image {
@@ -41,6 +40,7 @@
 
     img {
       width: 90%;
+      object-fit: contain;
       border-radius: .25rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, .75);
       margin-bottom: 5%;
