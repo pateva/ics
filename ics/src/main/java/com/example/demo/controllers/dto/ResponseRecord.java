@@ -1,54 +1,63 @@
 package com.example.demo.controllers.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResponseRecord {
-    private String _url;
-    private List<LabelDto> _tags;
-    private double _width;
-    private double _height;
+    @JsonProperty("_url")
+    private String url;
+
+    @JsonProperty("_tags")
+    private List<LabelDto> tags;
+
+    @JsonProperty("_width")
+    private double width;
+
+    @JsonProperty("_height")
+    private double height;
 
     public ResponseRecord() {
     }
 
-    public ResponseRecord(String _url, List<LabelDto> _tags, double _width, double _height) {
-        this._url = _url;
-        this._tags = _tags;
-        this._width = _width;
-        this._height = _height;
+    public ResponseRecord(String url, List<LabelDto> tags, double width, double height) {
+        this.url = url;
+        this.tags = tags;
+        this.width = width;
+        this.height = height;
     }
 
-    public String get_url() {
-        return _url;
+    public String getUrl() {
+        return url;
     }
 
-    public void set_url(String _url) {
-        this._url = _url;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public List<LabelDto> get_tags() {
-        return _tags;
+    public List<LabelDto> getTags() {
+        return tags;
     }
 
-    public void set_tags(List<LabelDto> _tags) {
-        this._tags = _tags;
+    public void setTags(List<LabelDto> tags) {
+        this.tags = tags;
     }
 
-    public double get_width() {
-        return _width;
+    public double getWidth() {
+        return width;
     }
 
-    public void set_width(double _width) {
-        this._width = _width;
+    public void setWidth(double width) {
+        this.width = width;
     }
 
-    public double get_height() {
-        return _height;
+    public double getHeight() {
+        return height;
     }
 
-    public void set_height(double _height) {
-        this._height = _height;
+    public void setHeight(double height) {
+        this.height = height;
     }
 }
