@@ -1,27 +1,30 @@
 package com.example.demo.controllers.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class URL {
-    private String _url;
+    @JsonProperty("_url")
+    private String url;
 
     public URL() {
     }
 
     public URL(String url) {
-        this._url = url;
+        this.url = url;
     }
 
-    public String get_url() {
-        return _url;
+    public String getUrl() {
+        return url;
     }
 
-    public void set_url(String _url) {
-        this._url = _url;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
     public String toString() {
         return "URL{" +
-                "_url='" + _url + '\'' +
+                "url='" + url + '\'' +
                 '}';
     }
 }
