@@ -23,8 +23,8 @@ import java.util.Set;
 @RequestMapping("/images")
 public class ImagesController {
 
-    private ImageRepository imageRepository;
-    private LabelsController labelsController;
+    private final ImageRepository imageRepository;
+    private final LabelsController labelsController;
 
     @Autowired
     public ImagesController(ImageRepository imageRepository, LabelsController labelsController) {
@@ -68,7 +68,7 @@ public class ImagesController {
 
         }
 
-        String url = body.getRecords().get(0).get_url();
+        String url = body.getRecords().get(0).getUrl();
 
         if (imageRepository.existsByImageUrl(url) && !noCache) {
             Image image = imageRepository.findByImageUrl(url);
@@ -106,11 +106,11 @@ public class ImagesController {
     private Image mapperImage(ResponseRecord response) {
         Set<Label> labelSet = new HashSet<>();
 
-        for (LabelDto label : response.get_tags()) {
+        for (LabelDto label : response.getTags()) {
             labelSet.add(labelsController.mapperLabel(label));
         }
 
-        return new Image(response.get_url(), response.get_width(), response.get_height(), labelSet);
+        return new Image(response.getUrl(), response.getWidth(), response.getHeight(), labelSet);
     }
 
 }
