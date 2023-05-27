@@ -2,14 +2,17 @@ package com.example.demo.services;
 
 import com.example.demo.controllers.dto.RecognitionRequestBody;
 import com.example.demo.controllers.dto.RecognitionResponseBody;
+import com.example.demo.exceptions.InvalidRequestBodyException;
+import com.example.demo.exceptions.UserNotAuthenticatedException;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+
 public class XimilarAPI {
     private static final String API_URL_CLASSIFY = "https://api.ximilar.com/photo/tags/v2/tags";
     private static final String API_KEY = System.getenv("API_KEY_XIMILAR");
-    private static RestTemplate restTemplate = new RestTemplate();
+    private static final RestTemplate restTemplate = new RestTemplate();
 
     public static ResponseEntity<RecognitionResponseBody> postApiTagRequestXimilar(RecognitionRequestBody body) {
 
@@ -27,13 +30,15 @@ public class XimilarAPI {
             return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
         } catch (HttpClientErrorException.BadRequest e) {
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            throw new InvalidRequestBodyException();
         } catch (HttpClientErrorException.Unauthorized e) {
 
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            throw new UserNotAuthenticatedException();
         } catch (Exception e) {
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }
+
+
