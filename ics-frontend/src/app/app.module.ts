@@ -11,11 +11,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import {NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-
-
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -30,12 +29,14 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
-    MatInputModule,
-    MatIconModule,
-    MatFormFieldModule,
     MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
     NgIf,
-    FormsModule
+    FormsModule,
+    MatCardModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
