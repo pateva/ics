@@ -7,7 +7,7 @@ import { ImageClassificationComponent } from './image-classification/image-class
 const routes: Routes = [
   {path: 'gallery', component: GalleryComponent},
   {path: 'image-classification', component: ImageClassificationComponent},
-  {path: 'image-classification/1', component: SingleImagePageComponent},
+  {path: 'image-classification/:id', component: SingleImagePageComponent},
   {path: '', redirectTo: 'image-classification', pathMatch: 'full'},
   {path: '**', redirectTo: 'image-classification', pathMatch: 'full'}
 ];

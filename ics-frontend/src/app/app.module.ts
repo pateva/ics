@@ -29,7 +29,14 @@ import {MatCardModule} from '@angular/material/card';
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    NgIf,
+    FormsModule,
+    MatCardModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
