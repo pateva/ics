@@ -1,0 +1,17 @@
+.example-form-field {
+    width: 40vw;
+    text-align: left;
+  }
+
+  .content-container {
+    place-items: center;
+    display: grid;
+    height: calc(100% - 80px);
+  }
+  
+
+.input-url{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

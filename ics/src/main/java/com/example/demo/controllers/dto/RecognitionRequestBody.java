@@ -44,7 +44,7 @@ public class RecognitionRequestBody {
         if (records.size() != 1) throw new InvalidUrlException();
 
         try {
-            URI uri = new URI(records.get(0).get_url());
+            URI uri = new URI(records.get(0).getUrl());
             return uri.isAbsolute() && uri.getScheme().matches("^https?$");
         } catch (URISyntaxException e) {
             return false;
