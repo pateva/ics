@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent {
-
+  value: string = ''; // Declare the 'value' property
 }
