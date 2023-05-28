@@ -1,9 +1,13 @@
   .header-right {
     overflow: hidden;
-    padding: 20px 10px;
     display: flex;
     align-items: center;
     gap:30px;
+  }
+
+  .mat-toolbar {
+    margin-bottom: 5%;
+    padding: 0 2%;
   }
 
   .mat-toolbar-row {
