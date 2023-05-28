@@ -1,6 +1,7 @@
 com\example\demo\DemoApplication.class
 com\example\demo\controllers\dto\ResponseRecord.class
 com\example\demo\controllers\ImagesController.class
+com\example\demo\exceptions\InvalidRequestBodyExceptionHandler.class
 com\example\demo\controllers\dto\URL.class
 com\example\demo\models\Image.class
 com\example\demo\controllers\dto\LabelDto.class
@@ -10,6 +11,7 @@ com\example\demo\exceptions\UserNotAuthenticatedException.class
 com\example\demo\controllers\LabelsController.class
 com\example\demo\exceptions\UserNotAuthenticatedExceptionHandler.class
 com\example\demo\services\XimilarAPI.class
+com\example\demo\exceptions\InvalidRequestBodyException.class
 com\example\demo\exceptions\InvalidUrlException.class
 com\example\demo\models\Label.class
 com\example\demo\repositories\LabelRepository.class

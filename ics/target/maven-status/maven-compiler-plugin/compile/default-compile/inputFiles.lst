@@ -11,8 +11,10 @@ C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\d
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\repositories\ImageRepository.java
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\models\Image.java
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\services\ImageClassificationService.java
+C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\exceptions\InvalidRequestBodyException.java
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\controllers\dto\RecognitionResponseBody.java
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\controllers\ImagesController.java
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\controllers\dto\LabelDto.java
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\exceptions\UserNotAuthenticatedExceptionHandler.java
 C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\exceptions\InvalidUrlException.java
+C:\Users\ateva\OneDrive\Documents\UNI\Github\ics\ics\src\main\java\com\example\demo\exceptions\InvalidRequestBodyExceptionHandler.java
