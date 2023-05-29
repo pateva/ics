@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static io.restassured.RestAssured.given;
 import static restAssuredControllersTest.TestArguments.BASE_URL;
+import static restAssuredControllersTest.TestArguments.PATH;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetAllImagesFunctionalTests {
@@ -19,7 +20,7 @@ public class GetAllImagesFunctionalTests {
     static void setUp() {
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(BASE_URL)
-                .setBasePath("/images")
+                .setBasePath(PATH)
                 .build();
     }
 

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -92,6 +93,11 @@ public class ImagesController {
 
     @DeleteMapping(value = {"/{id}"})
     public void deleteImage(@PathVariable Long id) {
+
+        if(!imageRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found");
+        }
+
         imageRepository.deleteById(id);
     }
 
