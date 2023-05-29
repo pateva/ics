@@ -15,7 +15,7 @@
     ],
     "properties": {
       "imageId": {
-        "type": "integer",
+        "type": "number",
         "minimum": 1
       },
       "url": {
@@ -31,16 +31,15 @@
         "type": "string"
       },
       "width": {
-        "type": "integer",
+        "type": "number",
         "minimum": 1
       },
       "height": {
-        "type": "integer",
+        "type": "number",
         "minimum": 1
       },
       "imageService": {
-        "type": "string",
-        "default": "Ximilar"
+        "type": "string"
       },
       "labels": {
         "type": "array"

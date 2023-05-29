@@ -1,14 +1,21 @@
 package restAssuredControllersTest;
 
+import com.example.demo.models.Image;
+import com.example.demo.models.Label;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.*;
 import io.restassured.builder.RequestSpecBuilder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.io.File;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
-import static restAssuredControllersTest.TestArguments.BASE_URL;
-import static restAssuredControllersTest.TestArguments.PATH;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
+import static org.hamcrest.Matchers.empty;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static restAssuredControllersTest.TestArguments.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetAllImagesFunctionalTests {
@@ -35,27 +42,44 @@ public class GetAllImagesFunctionalTests {
                 .prettyPeek()
                 .then()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(IMAGES_JSON_TEMPLATE_PATH)));
 
-        //json validation
     }
 
     @ParameterizedTest
     @CsvSource({"vector"})
     @DisplayName("Get images by labels")
-    void testGetImagesWithTags_ReturnSpecified(String firstLabel) {
+    void testGetImagesWithTags_ReturnSpecified(String label) {
 
-                given()
-                        .spec(requestSpecification)
-                        .queryParam("labels", firstLabel)
-                        .when()
-                        .get()
-                        .prettyPeek()
-                        .then()
-                        .assertThat()
-                        .statusCode(200);
+        List<Image> images = given()
+                .spec(requestSpecification)
+                .queryParam("labels", label)
+                .when()
+                .get()
+                .prettyPeek()
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .body(matchesJsonSchema(new File(IMAGES_JSON_TEMPLATE_PATH)))
+                .and()
+                .extract().jsonPath()
+                .getList(".", Image.class);
 
-                //assert and json validation
+
+        assertTrue(hasLabel(images, label));
+    }
+
+    private boolean hasLabel(List<Image> receivedImages, String label) {
+        boolean isExisting = false;
+
+        for (Image image : receivedImages) {
+            for(Label lbl : image.getLabels()) {
+                if(lbl.getLabelDescription().equals(label)) isExisting = true;
+            }
+        }
+
+        return isExisting;
     }
 
     @ParameterizedTest
@@ -63,21 +87,18 @@ public class GetAllImagesFunctionalTests {
     @DisplayName("Get images by labels")
     void testGetImagesWithTags_ReturnNothing(String firstLabel) {
 
-                given()
-                        .spec(requestSpecification)
-                        .queryParam("labels", firstLabel)
-                        .when()
-                        .get()
-                        .prettyPeek()
-                        .then()
-                        .assertThat()
-                        .statusCode(200);
-
-                //negative test -> assert that nothing is returned
-                //assert and json validation
+        given()
+                .spec(requestSpecification)
+                .queryParam("labels", firstLabel)
+                .when()
+                .get()
+                .prettyPeek()
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and()
+                .body("$", empty());
     }
-
-
 
 
 }

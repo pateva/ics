@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static restAssuredControllersTest.TestArguments.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class DeleteImagesByIdFunctionalTest {
+public class DeleteImagesByIdFunctionalTests {
 
     private static RequestSpecBuilder builder;
     private static RequestSpecification requestSpecification;
