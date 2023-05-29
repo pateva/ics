@@ -48,7 +48,7 @@ public class ImagesController {
             return ResponseEntity.notFound().build();
         }
 
-        return new ResponseEntity<>(imageRepository.getReferenceById(id), HttpStatus.OK);
+        return new ResponseEntity<>(imageRepository.findById(id).get(), HttpStatus.OK);
     }
 
 

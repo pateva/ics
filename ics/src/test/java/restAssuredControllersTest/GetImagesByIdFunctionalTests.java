@@ -21,7 +21,7 @@ public class GetImagesByIdFunctionalTests {
     }
 
     @Test
-    @DisplayName("Get with path variable --ValidId returns 200")
+    @DisplayName("Get with path variable, returns 200")
     void testGetWithId_Returns200() {
         given()
                 .spec(requestSpecification)
@@ -32,6 +32,20 @@ public class GetImagesByIdFunctionalTests {
                 .then()
                 .assertThat()
                 .statusCode(200);
+    }
+
+    @Test
+    @DisplayName("Get with path variable, returns 404")
+    void testGetWithId_Returns404() {
+        given()
+                .spec(requestSpecification)
+                .pathParam("id", "5")
+                .when()
+                .get()
+                .prettyPeek()
+                .then()
+                .assertThat()
+                .statusCode(404);
     }
 
 
