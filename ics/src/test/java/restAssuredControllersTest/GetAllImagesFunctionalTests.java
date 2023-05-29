@@ -49,7 +49,7 @@ public class GetAllImagesFunctionalTests {
     @ParameterizedTest
     @CsvSource({"vector"})
     @DisplayName("Get images by labels")
-    void testGetImagesWithTags_ReturnSpecified(String label) {
+    void testGetImagesWithLabels_ReturnSpecified(String label) {
 
         List<Image> images = given()
                 .spec(requestSpecification)
@@ -83,7 +83,7 @@ public class GetAllImagesFunctionalTests {
     @ParameterizedTest
     @CsvSource({"nothing"})
     @DisplayName("Get images by labels")
-    void testGetImagesWithTags_ReturnNothing(String firstLabel) {
+    void testGetImagesWithLabels_ReturnNothing(String firstLabel) {
 
         given()
                 .spec(requestSpecification)
