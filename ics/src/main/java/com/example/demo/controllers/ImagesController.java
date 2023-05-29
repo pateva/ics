@@ -4,6 +4,7 @@ import com.example.demo.controllers.dto.LabelDto;
 import com.example.demo.controllers.dto.RecognitionRequestBody;
 import com.example.demo.controllers.dto.RecognitionResponseBody;
 import com.example.demo.controllers.dto.ResponseRecord;
+import com.example.demo.exceptions.InvalidUrlException;
 import com.example.demo.models.Image;
 import com.example.demo.models.Label;
 import com.example.demo.repositories.ImageRepository;
@@ -60,12 +61,12 @@ public class ImagesController {
 
         if (!rateLimiter.tryAcquire()) {
 
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
+            throw new RuntimeException("Too many requests!");
         }
 
         if (!body.isValidUrl()) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 
+            throw new InvalidUrlException();
         }
 
         String url = body.getRecords().get(0).getUrl();
