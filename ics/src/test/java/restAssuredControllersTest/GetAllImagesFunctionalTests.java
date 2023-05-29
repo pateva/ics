@@ -44,7 +44,6 @@ public class GetAllImagesFunctionalTests {
                 .assertThat()
                 .statusCode(200)
                 .body(matchesJsonSchema(new File(IMAGES_JSON_TEMPLATE_PATH)));
-
     }
 
     @ParameterizedTest
@@ -65,7 +64,6 @@ public class GetAllImagesFunctionalTests {
                 .and()
                 .extract().jsonPath()
                 .getList(".", Image.class);
-
 
         assertTrue(hasLabel(images, label));
     }
@@ -99,6 +97,4 @@ public class GetAllImagesFunctionalTests {
                 .and()
                 .body("$", empty());
     }
-
-
 }

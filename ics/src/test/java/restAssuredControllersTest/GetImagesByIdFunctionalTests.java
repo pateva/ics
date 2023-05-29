@@ -43,8 +43,6 @@ public class GetImagesByIdFunctionalTests {
                 .body("width", not(emptyOrNullString()))
                 .body("height", not(emptyOrNullString()))
                 .body("imageService", is(IMAGE_SERVICE));
-
-
     }
 
     @Test
@@ -60,6 +58,4 @@ public class GetImagesByIdFunctionalTests {
                 .assertThat()
                 .statusCode(404);
     }
-
-
 }

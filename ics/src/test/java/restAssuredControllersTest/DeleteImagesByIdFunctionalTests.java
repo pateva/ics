@@ -49,5 +49,4 @@ public class DeleteImagesByIdFunctionalTests {
                 .assertThat()
                 .statusCode(404);
     }
-
 }
