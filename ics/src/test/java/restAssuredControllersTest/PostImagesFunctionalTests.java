@@ -1,12 +1,10 @@
 package restAssuredControllersTest;
 
-import com.example.demo.models.Image;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.*;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import static io.restassured.RestAssured.given;
 import static restAssuredControllersTest.TestArguments.*;
