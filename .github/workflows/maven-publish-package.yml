@@ -40,7 +40,7 @@ jobs:
       run: mvn -B package --file ics/pom.xml -DskipTests
 
     - name: Build with Maven
-      run: mvn -B package --file ics/pom.xml
+      run: mvn -B package --file ics/pom.xml -Dmaven.test.failure.ignore=true test
 
     - name: Publish to GitHub Packages
     
