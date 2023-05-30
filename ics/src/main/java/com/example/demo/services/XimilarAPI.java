@@ -4,6 +4,7 @@ import com.example.demo.controllers.dto.RecognitionRequestBody;
 import com.example.demo.controllers.dto.RecognitionResponseBody;
 import com.example.demo.exceptions.InvalidRequestBodyException;
 import com.example.demo.exceptions.UserNotAuthenticatedException;
+import com.example.demo.exceptions.XimilarException;
 import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +15,7 @@ public class XimilarAPI {
     private static final String API_KEY = System.getenv("API_KEY_XIMILAR");
     private static final RestTemplate restTemplate = new RestTemplate();
 
-    public static ResponseEntity<RecognitionResponseBody> postApiTagRequestXimilar(RecognitionRequestBody body) {
+    public static RecognitionResponseBody postApiTagRequestXimilar(RecognitionRequestBody body) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Token " + API_KEY);
@@ -27,7 +28,7 @@ public class XimilarAPI {
                     , requestEntity
                     , RecognitionResponseBody.class);
 
-            return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
+            return responseEntity.getBody();
         } catch (HttpClientErrorException.BadRequest e) {
 
             throw new InvalidRequestBodyException();
@@ -36,7 +37,7 @@ public class XimilarAPI {
             throw new UserNotAuthenticatedException();
         } catch (Exception e) {
 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new XimilarException("Something went wrong!");
         }
     }
 }

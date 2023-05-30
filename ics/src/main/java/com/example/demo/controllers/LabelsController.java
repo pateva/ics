@@ -4,8 +4,10 @@ import com.example.demo.controllers.dto.LabelDto;
 import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.Label;
 import com.example.demo.repositories.LabelRepository;
+import org.json.HTTP;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,29 +26,29 @@ public class LabelsController {
     }
 
     @GetMapping
-    public List<Label> listLabels() {
-        return labelRepository.findAll();
+    public ResponseEntity<List<Label>> listLabels() {
+        return new ResponseEntity<>(labelRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Label getLabel(@PathVariable Long id) {
+    public ResponseEntity<Label> getLabel(@PathVariable Long id) {
         if (!labelRepository.existsById(id)) {
             throw new ResourceNotFoundException("Label id does not exist");
         }
 
-        return labelRepository.findById(id).get();
+        return new ResponseEntity<>(labelRepository.findById(id).get(), HttpStatus.OK);
     }
 
     @PostMapping
-    public Label createLabel(@RequestBody final LabelDto labelDto) {
+    public ResponseEntity<Label> createLabel(@RequestBody final LabelDto labelDto) {
         String labelDescription = labelDto.getName();
 
         if (labelRepository.existsByLabelDescription(labelDescription)) {
 
-            return labelRepository.findByLabelDescription(labelDescription);
+            return new ResponseEntity<>(labelRepository.findByLabelDescription(labelDescription), HttpStatus.OK);
         } else {
 
-            return labelRepository.saveAndFlush(new Label(labelDescription));
+            return  new ResponseEntity<>(labelRepository.saveAndFlush(new Label(labelDescription)), HttpStatus.OK);
         }
     }
 
@@ -56,10 +58,10 @@ public class LabelsController {
     }
 
     @PutMapping(value = {"/{id}"})
-    public Label updateLabel(@PathVariable Long id, @RequestBody Label label) {
+    public ResponseEntity<Label> updateLabel(@PathVariable Long id, @RequestBody Label label) {
         Label existingLabel = labelRepository.getReferenceById(id);
         BeanUtils.copyProperties(label, existingLabel, "label_id");
-        return labelRepository.saveAndFlush(existingLabel);
+        return new ResponseEntity<>(labelRepository.saveAndFlush(existingLabel), HttpStatus.OK);
 
     }
 

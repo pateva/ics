@@ -27,7 +27,6 @@ public class PostImagesFunctionalTests {
                 .setBasePath(PATH_IMAGES)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
-                //.addHeader("Authentication", "Token " + System.getenv("API_KEY_XIMILAR"))
                 .build();
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
@@ -73,6 +72,22 @@ public class PostImagesFunctionalTests {
         jsonObject.put("records", recordsArray);
 
         return jsonObject.toJSONString();
+    }
+
+    @Test
+    @DisplayName("Post image with invalid url, returns 400")
+    void testPostImage_Returns400() {
+
+        given()
+                .spec(requestSpecification)
+                .body(getJson(IMAGE_INVALID_URL))
+                .when()
+                .post()
+                .prettyPeek()
+                .then()
+                .assertThat()
+                .statusCode(400);
+
     }
 
 }
