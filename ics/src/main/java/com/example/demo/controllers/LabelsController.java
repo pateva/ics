@@ -5,6 +5,7 @@ import com.example.demo.models.Label;
 import com.example.demo.repositories.LabelRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,14 @@ public class LabelsController {
 
     @GetMapping("/{id}")
     public Label getLabel(@PathVariable Long id) {
-        return labelRepository.getReferenceById(id);
+        if (!labelRepository.existsById(id)) {
+
+
+
+
+        }
+
+        return labelRepository.findById(id).get();
     }
 
     @PostMapping

@@ -9,17 +9,18 @@ import java.io.File;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 import static restAssuredControllersTest.TestArguments.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class GetImagesByIdFunctionalTests {
+public class GetLabelByIdFunctionalTests {
     private static RequestSpecification requestSpecification;
 
     @BeforeAll
     static void setUp() {
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(BASE_URL)
-                .setBasePath(PATH_IMAGES_ID)
+                .setBasePath(PATH_LABELS_ID)
                 .build();
     }
 
@@ -28,21 +29,17 @@ public class GetImagesByIdFunctionalTests {
     void testGetWithId_Returns200() {
         given()
                 .spec(requestSpecification)
-                .pathParam("id", IMAGE_ID)
+                .pathParam("id", LABEL_ID)
                 .when()
                 .get()
                 .prettyPeek()
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .body(matchesJsonSchema(new File(SINGLE_IMAGE_JSON_TEMPLATE_PATH)))
+                .body(matchesJsonSchema(new File(SINGLE_LABEL_JSON_TEMPLATE_PATH)))
                 .and()
-                .body("imageId", is(IMAGE_ID))
-                .body("createdAt", not(emptyOrNullString()))
-                .body("updatedAt", not(emptyOrNullString()))
-                .body("width", not(emptyOrNullString()))
-                .body("height", not(emptyOrNullString()))
-                .body("imageService", is(IMAGE_SERVICE));
+                .body("labelId", is(LABEL_ID))
+                .body("labelDescription", not(emptyOrNullString()));
     }
 
     @Test
@@ -50,7 +47,7 @@ public class GetImagesByIdFunctionalTests {
     void testGetWithId_Returns404() {
         given()
                 .spec(requestSpecification)
-                .pathParam("id", "5")
+                .pathParam("id", "0")
                 .when()
                 .get()
                 .prettyPeek()
@@ -58,4 +55,5 @@ public class GetImagesByIdFunctionalTests {
                 .assertThat()
                 .statusCode(404);
     }
+
 }

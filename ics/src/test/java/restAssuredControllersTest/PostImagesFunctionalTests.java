@@ -1,6 +1,7 @@
 package restAssuredControllersTest;
 
 import com.example.demo.models.Image;
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONArray;
@@ -17,12 +18,13 @@ public class PostImagesFunctionalTests {
     private static Long idNewImage;
 
 
+
     @BeforeAll
     static void setUp() {
 
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(BASE_URL)
-                .setBasePath("/images")
+                .setBasePath(PATH_IMAGES)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
                 //.addHeader("Authentication", "Token " + System.getenv("API_KEY_XIMILAR"))
@@ -44,6 +46,8 @@ public class PostImagesFunctionalTests {
     @Test
     @DisplayName("Post image and get labels, returns 200")
     void testPostImage_Returns200() {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+
         Image image =
                 given()
                         .spec(requestSpecification)

@@ -20,14 +20,13 @@ import static restAssuredControllersTest.TestArguments.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetAllImagesFunctionalTests {
 
-    private static RequestSpecBuilder builder;
     private static RequestSpecification requestSpecification;
 
     @BeforeAll
     static void setUp() {
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(BASE_URL)
-                .setBasePath(PATH)
+                .setBasePath(PATH_IMAGES)
                 .build();
     }
 
