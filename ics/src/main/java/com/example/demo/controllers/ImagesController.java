@@ -47,7 +47,7 @@ public class ImagesController {
     public ResponseEntity<Image> getImage(@PathVariable Long id) {
         if (!imageRepository.existsById(id)) {
 
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found");
+            return ResponseEntity.notFound().build();
         }
 
         return new ResponseEntity<>(imageRepository.findById(id).get(), HttpStatus.OK);
@@ -62,7 +62,7 @@ public class ImagesController {
 
         if (!rateLimiter.tryAcquire()) {
 
-            throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests! Please wait a bit before trying again!");
+            throw new RuntimeException("Too many requests!");
         }
 
         if (!body.isValidUrl()) {

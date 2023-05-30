@@ -22,10 +22,10 @@ public class PostImagesFunctionalTests {
 
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(BASE_URL)
-                .setBasePath(PATH)
+                .setBasePath("/images")
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
-                .addHeader("Authentication", "Token " + System.getenv("API_KEY_XIMILAR"))
+                //.addHeader("Authentication", "Token " + System.getenv("API_KEY_XIMILAR"))
                 .build();
     }
 

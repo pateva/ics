@@ -6,7 +6,7 @@ public class TestArguments {
     public static final String BASE_URL = "http://localhost:8080";
     public static final String PATH = "/images";
     public static final String PATH_ID = PATH + "/{id}";
-    public static final String IMAGE_URL = "https://lumiere-a.akamaihd.net/v1/images/ct_snowwhite_upcportalreskin_20694_eb571c22.jpeg?region=0%2C0%2C330%2C330";
+    public static final String IMAGE_URL = "https://media1.popsugar-assets.com/files/thumbor/UOPRdnbZ1s6XYh2LIz818gMT8CE/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2018/10/03/826/n/1922283/8e56ee3c5bb50f849f97e5.03708514_/i/Disney-Lilo-Stitch-Live-Action-Reboot-Details.jpg";
     public static final int IMAGE_ID = 8;
     public static final String IMAGE_SERVICE = "Ximilar";
     public static final String IMAGES_JSON_TEMPLATE_PATH = "src/test/resources/json-templates/images-template.json";
