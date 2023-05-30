@@ -1,11 +1,9 @@
 package restAssuredControllersTest;
 
-import com.example.demo.models.Image;
 import com.example.demo.models.Label;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
-import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.*;
 
