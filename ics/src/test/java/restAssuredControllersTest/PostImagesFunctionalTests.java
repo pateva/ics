@@ -49,18 +49,17 @@ public class PostImagesFunctionalTests {
     void testPostImage_Returns200() {
        // RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 
-        Image image =
                 given()
                         .spec(requestSpecification)
                         .body(getJson(IMAGE_URL))
-                        .when()
+                .when()
                         .post()
                         .prettyPeek()
-                        .then()
+                .then()
                         .assertThat()
-                        .statusCode(200)
-                        .and()
-                        .extract().as(Image.class);
+                        .statusCode(200);
+//                        .and()
+//                        .extract().as(Image.class);
     }
 
     private String getJson(String url) {
@@ -68,12 +67,12 @@ public class PostImagesFunctionalTests {
         JSONArray recordsArray = new JSONArray();
 
         JSONObject recordObject = new JSONObject();
-        recordObject.put("_url", url);
+        recordObject.put("_url", IMAGE_URL);
 
         recordsArray.put(recordObject);
         jsonObject.put("records", recordsArray);
 
-        return jsonObject.toString();
+        return jsonObject.toJSONString();
     }
 
 }

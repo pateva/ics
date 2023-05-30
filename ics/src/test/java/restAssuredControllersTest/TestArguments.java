@@ -8,7 +8,7 @@ public class TestArguments {
     public static final String PATH_LABELS = "/labels";
     public static final String PATH_IMAGES_ID = PATH_IMAGES + "/{id}";
     public static final String PATH_LABELS_ID = PATH_LABELS + "/{id}";
-    public static final String IMAGE_URL = "https://media1.popsugar-assets.com/files/thumbor/UOPRdnbZ1s6XYh2LIz818gMT8CE/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2018/10/03/826/n/1922283/8e56ee3c5bb50f849f97e5.03708514_/i/Disney-Lilo-Stitch-Live-Action-Reboot-Details.jpg";
+    public static final String IMAGE_URL = "https://www.justgoholidays.com/images/Itinerary/17-lake-garda-verona-express.jpg";
     public static final int IMAGE_ID = 8;
     public static final int LABEL_ID = 7;
     public static final String NEW_LABEL = "testHappyPath";
