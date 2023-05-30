@@ -5,6 +5,7 @@ import com.example.demo.controllers.dto.RecognitionRequestBody;
 import com.example.demo.controllers.dto.RecognitionResponseBody;
 import com.example.demo.controllers.dto.ResponseRecord;
 import com.example.demo.exceptions.InvalidUrlException;
+import com.example.demo.exceptions.ResourceNotFoundException;
 import com.example.demo.models.Image;
 import com.example.demo.models.Label;
 import com.example.demo.repositories.ImageRepository;
@@ -35,11 +36,11 @@ public class ImagesController {
     }
 
     @GetMapping
-    public List<Image> listImages(@RequestParam(required = false) List<String> labels) {
+    public ResponseEntity<List<Image>> listImages(@RequestParam(required = false) List<String> labels) {
         if (labels == null) {
-            return imageRepository.findAll();
+            return new ResponseEntity<>(imageRepository.findAll(), HttpStatus.OK);
         } else {
-            return imageRepository.findImagesByLabels(labels);
+            return new ResponseEntity<>(imageRepository.findImagesByLabels(labels), HttpStatus.OK);
         }
     }
 
@@ -47,7 +48,7 @@ public class ImagesController {
     public ResponseEntity<Image> getImage(@PathVariable Long id) {
         if (!imageRepository.existsById(id)) {
 
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException("Image id does not exist!");
         }
 
         return new ResponseEntity<>(imageRepository.findById(id).get(), HttpStatus.OK);
@@ -58,7 +59,7 @@ public class ImagesController {
     public ResponseEntity<Image> classifyImage(@RequestBody RecognitionRequestBody body,
                                                @RequestParam(required = false, defaultValue = "false") boolean noCache) {
         RateLimiter rateLimiter = RateLimiter.create(10);
-        ResponseEntity<RecognitionResponseBody> responseEntity;
+        RecognitionResponseBody responseEntity;
 
         if (!rateLimiter.tryAcquire()) {
 
@@ -71,23 +72,22 @@ public class ImagesController {
         }
 
         String url = body.getRecords().get(0).getUrl();
+        Image image = new Image();
 
         if (imageRepository.existsByImageUrl(url) && !noCache) {
-            Image image = imageRepository.findByImageUrl(url);
-
-            return new ResponseEntity<>(image, HttpStatus.ACCEPTED);
+            image = imageRepository.findByImageUrl(url);
 
         } else {
             responseEntity = XimilarAPI.postApiTagRequestXimilar(body);
-            Image image = mapperImage(responseEntity.getBody().getRecords().get(0));
+            image = mapperImage(responseEntity.getRecords().get(0));
             if (imageRepository.existsById(123L)) {
                 //todo nice to have by logic da poznae image-a, nqma da e ID
             }
 
             imageRepository.saveAndFlush(image);
-
-            return new ResponseEntity<>(image, HttpStatus.OK);
         }
+
+        return new ResponseEntity<>(image, HttpStatus.OK);
     }
 
 

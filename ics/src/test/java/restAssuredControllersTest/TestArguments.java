@@ -9,6 +9,7 @@ public class TestArguments {
     public static final String PATH_IMAGES_ID = PATH_IMAGES + "/{id}";
     public static final String PATH_LABELS_ID = PATH_LABELS + "/{id}";
     public static final String IMAGE_URL = "https://www.justgoholidays.com/images/Itinerary/17-lake-garda-verona-express.jpg";
+    public static final String IMAGE_INVALID_URL = "not-valid";
     public static final int IMAGE_ID = 8;
     public static final int LABEL_ID = 7;
     public static final String NEW_LABEL = "testHappyPath";

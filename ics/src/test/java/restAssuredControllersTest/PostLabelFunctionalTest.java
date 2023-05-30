@@ -88,4 +88,5 @@ public class PostLabelFunctionalTest {
                 .body("labelDescription", is(EXISTING_LABEL));
 
     }
+
 }
