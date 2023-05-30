@@ -29,6 +29,7 @@ public class PostImagesFunctionalTests {
                 .addHeader("Accept", "application/json")
                 //.addHeader("Authentication", "Token " + System.getenv("API_KEY_XIMILAR"))
                 .build();
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @AfterAll
@@ -46,7 +47,7 @@ public class PostImagesFunctionalTests {
     @Test
     @DisplayName("Post image and get labels, returns 200")
     void testPostImage_Returns200() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+       // RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 
         Image image =
                 given()
