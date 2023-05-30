@@ -28,10 +28,10 @@ public class GetAllLabelsFunctionalTests {
 
         given()
                 .spec(requestSpecification)
-                .when()
+        .when()
                 .get()
                 .prettyPeek()
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(200)
                 .body(matchesJsonSchema(new File(LABELS_JSON_TEMPLATE_PATH)));

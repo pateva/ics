@@ -30,14 +30,14 @@ public class GetLabelByIdFunctionalTests {
         given()
                 .spec(requestSpecification)
                 .pathParam("id", LABEL_ID)
-                .when()
+        .when()
                 .get()
                 .prettyPeek()
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(200)
                 .body(matchesJsonSchema(new File(SINGLE_LABEL_JSON_TEMPLATE_PATH)))
-                .and()
+        .and()
                 .body("labelId", is(LABEL_ID))
                 .body("labelDescription", not(emptyOrNullString()));
     }

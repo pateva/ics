@@ -36,10 +36,10 @@ public class GetAllImagesFunctionalTests {
 
         given()
                 .spec(requestSpecification)
-                .when()
+        .when()
                 .get()
                 .prettyPeek()
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(200)
                 .body(matchesJsonSchema(new File(IMAGES_JSON_TEMPLATE_PATH)));

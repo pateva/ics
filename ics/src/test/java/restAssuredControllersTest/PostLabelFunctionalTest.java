@@ -35,7 +35,7 @@ public class PostLabelFunctionalTest {
     static void tearDown() {
         given()
                 .spec(requestSpecification)
-                .when()
+        .when()
                 .delete("/" + idNewLabel);
     }
 
@@ -47,17 +47,16 @@ public class PostLabelFunctionalTest {
                 given()
                         .spec(requestSpecification)
                         .body(getJson(NEW_LABEL))
-                        .when()
+                .when()
                         .post()
                         .prettyPeek()
-                        .then()
+                .then()
                         .assertThat()
                         .statusCode(200)
-                        .and()
+                .and()
                         .body(matchesJsonSchema(new File(SINGLE_LABEL_JSON_TEMPLATE_PATH)))
-                        .and()
                         .body("labelDescription", is(NEW_LABEL))
-                        .and()
+                .and()
                         .extract().as(Label.class);
 
         idNewLabel = label.getLabelId();
@@ -78,15 +77,14 @@ public class PostLabelFunctionalTest {
         given()
                 .spec(requestSpecification)
                 .body(getJson(EXISTING_LABEL))
-                .when()
+        .when()
                 .post()
                 .prettyPeek()
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(200)
-                .and()
+        .and()
                 .body(matchesJsonSchema(new File(SINGLE_LABEL_JSON_TEMPLATE_PATH)))
-                .and()
                 .body("labelDescription", is(EXISTING_LABEL));
 
     }

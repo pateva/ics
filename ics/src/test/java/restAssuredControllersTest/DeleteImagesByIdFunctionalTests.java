@@ -42,10 +42,10 @@ public class DeleteImagesByIdFunctionalTests {
 
         given()
                 .spec(requestSpecification)
-                .when()
+        .when()
                 .delete("images/1")
                 .prettyPeek()
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(404);
     }
