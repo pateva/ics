@@ -16,5 +16,4 @@ public class InvalidUrlExceptionHandler {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
-
 }

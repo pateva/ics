@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "imageId",
+      "imageUrl",
+      "createdAt",
+      "updatedAt",
+      "width",
+      "height",
+      "imageService",
+      "labels"
+    ],
+    "properties": {
+      "imageId": {
+        "type": "number",
+        "minimum": 1
+      },
+      "url": {
+        "type": "string",
+        "examples": [
+          "https://static.wikia.nocookie.net/disneyfanon/images/0/0e/Happy1.png"
+        ]
+      },
+      "createdAt": {
+        "type": "string"
+      },
+      "updatedAt": {
+        "type": "string"
+      },
+      "width": {
+        "type": "number",
+        "minimum": 1
+      },
+      "height": {
+        "type": "number",
+        "minimum": 1
+      },
+      "imageService": {
+        "type": "string"
+      },
+      "labels": {
+        "type": "array"
+      }
+    }
+  }
+}

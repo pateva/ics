@@ -4,6 +4,7 @@ import com.example.demo.controllers.dto.LabelDto;
 import com.example.demo.controllers.dto.RecognitionRequestBody;
 import com.example.demo.controllers.dto.RecognitionResponseBody;
 import com.example.demo.controllers.dto.ResponseRecord;
+import com.example.demo.exceptions.InvalidUrlException;
 import com.example.demo.models.Image;
 import com.example.demo.models.Label;
 import com.example.demo.repositories.ImageRepository;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.List;
@@ -48,7 +50,7 @@ public class ImagesController {
             return ResponseEntity.notFound().build();
         }
 
-        return new ResponseEntity<>(imageRepository.getReferenceById(id), HttpStatus.OK);
+        return new ResponseEntity<>(imageRepository.findById(id).get(), HttpStatus.OK);
     }
 
 
@@ -60,12 +62,12 @@ public class ImagesController {
 
         if (!rateLimiter.tryAcquire()) {
 
-            return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build();
+            throw new RuntimeException("Too many requests!");
         }
 
         if (!body.isValidUrl()) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 
+            throw new InvalidUrlException();
         }
 
         String url = body.getRecords().get(0).getUrl();
@@ -91,6 +93,11 @@ public class ImagesController {
 
     @DeleteMapping(value = {"/{id}"})
     public void deleteImage(@PathVariable Long id) {
+
+        if(!imageRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image not found");
+        }
+
         imageRepository.deleteById(id);
     }
 
