@@ -72,22 +72,22 @@ public class ImagesController {
         }
 
         String url = body.getRecords().get(0).getUrl();
-        Image image = new Image();
+
 
         if (imageRepository.existsByImageUrl(url) && !noCache) {
-            image = imageRepository.findByImageUrl(url);
+            Image image =  imageRepository.findByImageUrl(url);
 
+            return new ResponseEntity<>(image, HttpStatus.ACCEPTED);
         } else {
             responseEntity = XimilarAPI.postApiTagRequestXimilar(body);
-            image = mapperImage(responseEntity.getRecords().get(0));
+            Image image = mapperImage(responseEntity.getRecords().get(0));
             if (imageRepository.existsById(123L)) {
                 //todo nice to have by logic da poznae image-a, nqma da e ID
             }
 
             imageRepository.saveAndFlush(image);
+            return new ResponseEntity<>(image, HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(image, HttpStatus.OK);
     }
 
 
