@@ -15,18 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ImageClassificationService {
-//    private Image mapperImage(ResponseRecord response) {
-//        Set<Label> labelSet = new HashSet<>();
-//
-//        for (LabelDto label : response.get_tags()) {
-//            labelSet.add(labelsController.mapperLabel(label));
-//            //todo this could be in a service
-//        }
-//
-//        return new Image(response.get_url(), response.get_width(), response.get_height(), labelSet);
-//    }
-
-
+//todo service class
 }
 
 
