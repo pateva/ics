@@ -8,14 +8,19 @@
       <input name="url" type="text" matInput [(ngModel)]="imageUrl" 
       required #urlField="ngModel"
       (blur)="onBlur(urlField)"
-      pattern="^(https?://)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(/[a-zA-Z0-9-]*)*(\?[a-zA-Z0-9-]+=[a-zA-Z0-9-]*)?$"
+      
       >
     <mat-error *ngIf="imageUrl">Invalid URL format</mat-error>
     <button *ngIf="imageUrl" matSuffix mat-icon-button aria-label="Clear" (click)="imageUrl=''">
       <mat-icon>close</mat-icon>
     </button>    
 </mat-form-field>
-<button mat-raised-button color="primary">Analyze</button>
+<div [hidden]="!postError"
+class="alert alert-danger">
+{{postErrorMessage}}
+</div>
+
+<button mat-raised-button color="primary" [disabled]="!form.valid" >Analyze</button>
 
 </div>
 </form>
@@ -23,4 +28,6 @@
 </div>
 
 <!-- {{imageUrl | json}}
-{{originalImageUrl | json}} -->
+{{originalImageUrl | json}} 
+pattern="^(https?://)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(/[a-zA-Z0-9-]*)*(\?[a-zA-Z0-9-]+=[a-zA-Z0-9-]*)?$"
+-->

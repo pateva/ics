@@ -15,11 +15,16 @@ export class ImageClassificationComponent {
   imageUrl: string = this.originalImageUrl
 
   onSubmit(form: NgForm) {
+    if(form.valid) {
     console.log("In onSubmit: ", form.valid);
     this.dataService.postImageUrl(this.imageUrl).subscribe(
       result => console.log("Success: ", result),
       error => this.onHttpError(error)
-    );
+    );}
+    // } else {
+    //   this.postError = true;
+    //   this.postErrorMessage = "Please provide a valid link";
+    // }
   }
 
   onHttpError(errorResponse:any) {
