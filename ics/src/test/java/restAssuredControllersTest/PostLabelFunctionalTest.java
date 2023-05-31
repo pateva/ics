@@ -12,7 +12,7 @@ import java.io.File;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.is;
-import static restAssuredControllersTest.TestArguments.*;
+import static restAssuredControllersTest.TestService.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PostLabelFunctionalTest {
@@ -28,7 +28,6 @@ public class PostLabelFunctionalTest {
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Accept", "application/json")
                 .build();
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
     @AfterAll

@@ -9,7 +9,7 @@ import java.io.File;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
-import static restAssuredControllersTest.TestArguments.*;
+import static restAssuredControllersTest.TestService.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetImagesByIdFunctionalTests {

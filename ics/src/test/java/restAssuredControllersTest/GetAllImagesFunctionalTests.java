@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.empty;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static restAssuredControllersTest.TestArguments.*;
+import static restAssuredControllersTest.TestService.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetAllImagesFunctionalTests {
@@ -50,19 +50,20 @@ public class GetAllImagesFunctionalTests {
     @DisplayName("Get images by labels")
     void testGetImagesWithLabels_ReturnSpecified(String label) {
 
-        List<Image> images = given()
-                .spec(requestSpecification)
-                .queryParam("labels", label)
+        List<Image> images =
+                given()
+                        .spec(requestSpecification)
+                        .queryParam("labels", label)
                 .when()
-                .get()
-                .prettyPeek()
+                        .get()
+                        .prettyPeek()
                 .then()
-                .assertThat()
-                .statusCode(200)
-                .body(matchesJsonSchema(new File(IMAGES_JSON_TEMPLATE_PATH)))
+                        .assertThat()
+                        .statusCode(200)
+                        .body(matchesJsonSchema(new File(IMAGES_JSON_TEMPLATE_PATH)))
                 .and()
-                .extract().jsonPath()
-                .getList(".", Image.class);
+                        .extract().jsonPath()
+                        .getList(".", Image.class);
 
         assertTrue(hasLabel(images, label));
     }
@@ -71,8 +72,8 @@ public class GetAllImagesFunctionalTests {
         boolean isExisting = false;
 
         for (Image image : receivedImages) {
-            for(Label lbl : image.getLabels()) {
-                if(lbl.getLabelDescription().equals(label)) isExisting = true;
+            for (Label lbl : image.getLabels()) {
+                if (lbl.getLabelDescription().equals(label)) isExisting = true;
             }
         }
 
@@ -87,13 +88,13 @@ public class GetAllImagesFunctionalTests {
         given()
                 .spec(requestSpecification)
                 .queryParam("labels", firstLabel)
-                .when()
+        .when()
                 .get()
                 .prettyPeek()
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(200)
-                .and()
+        .and()
                 .body("$", empty());
     }
 }

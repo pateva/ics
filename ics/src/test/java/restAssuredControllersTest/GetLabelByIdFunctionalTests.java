@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.is;
-import static restAssuredControllersTest.TestArguments.*;
+import static restAssuredControllersTest.TestService.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetLabelByIdFunctionalTests {

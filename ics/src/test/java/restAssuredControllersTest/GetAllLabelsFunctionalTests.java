@@ -8,7 +8,7 @@ import java.io.File;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
-import static restAssuredControllersTest.TestArguments.*;
+import static restAssuredControllersTest.TestService.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GetAllLabelsFunctionalTests {
@@ -36,5 +36,4 @@ public class GetAllLabelsFunctionalTests {
                 .statusCode(200)
                 .body(matchesJsonSchema(new File(LABELS_JSON_TEMPLATE_PATH)));
     }
-
 }
