@@ -55,7 +55,7 @@ public class ImagesController {
         return new ResponseEntity<>(imageRepository.findById(id).get(), HttpStatus.OK);
     }
 
-    
+
     @PostMapping
     public ResponseEntity<Image> classifyImage(@RequestBody RecognitionRequestBody body,
                                                @RequestParam(required = false, defaultValue = "false") boolean noCache) {
