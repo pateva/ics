@@ -13,8 +13,10 @@ export class DataService {
   postImageUrl(imageUrl: string) : Observable<any> {
 
     return this.http.post('http://localhost:8080/images', this.postImageRequestBody(imageUrl));
-    
-    //return of(image);
+  }
+
+  getImageById(imageId: number) : Observable<any> {
+    return this.http.get(`http://localhost:8080/images/${imageId}`);
   }
 
   postImageRequestBody(imageUrl: string) : PostRequestBody {
