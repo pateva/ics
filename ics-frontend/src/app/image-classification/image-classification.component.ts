@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import {NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../data/data.service';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ics-image-classification',
@@ -26,6 +29,7 @@ export class ImageClassificationComponent {
         console.log("Success: ", result);
         const id = result.imageId;
         this.isWaiting = false; // Update isWaiting to false
+        // this.navigateToImageClassification(id);
         this.router.navigateByUrl(`/image-classification/${id}`);
       },
       error => {
@@ -33,6 +37,15 @@ export class ImageClassificationComponent {
         this.isWaiting = false; // Update isWaiting to false
       }
     );}   
+  }
+
+  navigateToImageClassification(imageId: number) {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        imageId: imageId
+      }
+    };
+    this.router.navigateByUrl(`/image-classification/${imageId}`, navigationExtras);
   }
 
   onHttpError(errorResponse:any) {
@@ -46,7 +59,7 @@ export class ImageClassificationComponent {
     
   }
 
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(private router: Router, private dataService: DataService, private route: ActivatedRoute) {
 
   }
 }
