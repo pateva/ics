@@ -14,7 +14,7 @@ export class DataService {
 
     console.log(imageUrl);
 
-    return this.http.post('/images', this.postImageRequestBody(imageUrl));
+    return this.http.post('http://localhost:8080/images', this.postImageRequestBody(imageUrl));
     
     //return of(image);
   }

@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/images")
 public class ImagesController {
 
@@ -54,7 +55,7 @@ public class ImagesController {
         return new ResponseEntity<>(imageRepository.findById(id).get(), HttpStatus.OK);
     }
 
-
+    
     @PostMapping
     public ResponseEntity<Image> classifyImage(@RequestBody RecognitionRequestBody body,
                                                @RequestParam(required = false, defaultValue = "false") boolean noCache) {
