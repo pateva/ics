@@ -15,7 +15,11 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { OverlayComponent } from './overlay/overlay.component'; 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import {HttpClientModule} from '@angular/common/http'
     SingleImagePageComponent,
     GalleryComponent,
     HeaderComponent,
+    OverlayComponent,
    
   ],
   imports: [
@@ -37,7 +42,8 @@ import {HttpClientModule} from '@angular/common/http'
     FormsModule,
     MatCardModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [],

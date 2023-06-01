@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../data/data.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'ics-image-classification',
   templateUrl: './image-classification.component.html',
@@ -11,20 +13,22 @@ export class ImageClassificationComponent {
   originalImageUrl: string = ''; 
   postError = false;
   postErrorMessage = '';
+  isWaiting: boolean = false;
 
   imageUrl: string = this.originalImageUrl
 
   onSubmit(form: NgForm) {
     if(form.valid) {
+    this.isWaiting = true;
     console.log("In onSubmit: ", form.valid);
     this.dataService.postImageUrl(this.imageUrl).subscribe(
       result => console.log("Success: ", result),
       error => this.onHttpError(error)
     );}
-    // } else {
-    //   this.postError = true;
-    //   this.postErrorMessage = "Please provide a valid link";
-    // }
+
+    this.isWaiting=false;
+    this.router.navigateByUrl(`/image-classification/9`)
+    
   }
 
   onHttpError(errorResponse:any) {
@@ -38,7 +42,7 @@ export class ImageClassificationComponent {
     
   }
 
-  constructor(private dataService: DataService) {
+  constructor(private router: Router, private dataService: DataService) {
 
   }
 }
