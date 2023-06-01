@@ -22,13 +22,17 @@ export class ImageClassificationComponent {
     this.isWaiting = true;
     console.log("In onSubmit: ", form.valid);
     this.dataService.postImageUrl(this.imageUrl).subscribe(
-      result => console.log("Success: ", result),
-      error => this.onHttpError(error)
-    );}
-
-    this.isWaiting=false;
-    this.router.navigateByUrl(`/image-classification/9`)
-    
+      result => {
+        console.log("Success: ", result);
+        const id = result.imageId;
+        this.isWaiting = false; // Update isWaiting to false
+        this.router.navigateByUrl(`/image-classification/${id}`);
+      },
+      error => {
+        this.onHttpError(error);
+        this.isWaiting = false; // Update isWaiting to false
+      }
+    );}   
   }
 
   onHttpError(errorResponse:any) {
