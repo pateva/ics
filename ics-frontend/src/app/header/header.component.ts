@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
-
-
 @Component({
   selector: 'ics-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  otherTheme = false;
+
   changeTheme() {
-    //change theme
+    this.otherTheme = !this.otherTheme;
   }
 }
 
