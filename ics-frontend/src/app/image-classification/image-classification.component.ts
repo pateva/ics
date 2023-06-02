@@ -5,6 +5,9 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ImageService } from '../data/image.service';
+import { LabelService } from '../data/label.service';
+import { ImageIdService } from '../data/image-id.service';
 
 @Component({
   selector: 'ics-image-classification',
@@ -27,10 +30,9 @@ export class ImageClassificationComponent {
     this.dataService.postImageUrl(this.imageUrl).subscribe(
       result => {
         console.log("Success: ", result);
-        const id = result.imageId;
+        this.setImageId = result.imageId;
         this.isWaiting = false; // Update isWaiting to false
-        // this.navigateToImageClassification(id);
-        this.router.navigateByUrl(`/image-classification/${id}`);
+        this.router.navigateByUrl(`/image-classification/${this.getImageId}`);
       },
       error => {
         this.onHttpError(error);
@@ -59,7 +61,17 @@ export class ImageClassificationComponent {
     
   }
 
-  constructor(private router: Router, private dataService: DataService, private route: ActivatedRoute) {
+  get getImageId(): number {
+    return this.imageIdService.imageId;
+  }
+
+  set setImageId(id: number) {
+    this.imageIdService.imageId = id;
+  }
+
+  constructor(private router: Router, 
+    private dataService: DataService,
+    private imageIdService: ImageIdService) {
 
   }
 }

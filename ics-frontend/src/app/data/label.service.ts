@@ -1,0 +1,12 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LabelService {
+
+  constructor() { }
+
+  labelId: number = 0;
+  labelDescription: string = "";
+}
