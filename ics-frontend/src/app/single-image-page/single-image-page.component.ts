@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
 import { ImageService } from '../data/image.service';
 import { ImageIdService } from '../data/image-id.service';
+import { LabelService } from '../data/label.service';
 
 @Component({
   selector: 'ics-single-image-page',
@@ -12,10 +13,10 @@ import { ImageIdService } from '../data/image-id.service';
 })
 export class SingleImagePageComponent {
 
-  // imageId: number = 0;
   postError: boolean = false;
   postErrorMessage: any;
   imageUrl: string = '';
+  labels: string[] = [];
 
   constructor(private dataService: DataService,
     private imageIdService: ImageIdService) {}
@@ -23,8 +24,9 @@ export class SingleImagePageComponent {
   ngOnInit() {
     this.dataService.getImageById(this.getImageId).subscribe(
       result => {
-        console.log(this.getImageId);
         this.imageUrl = result.imageUrl;
+        this.labels = result.labels.map((label:{ labelDescription: string }) => label.labelDescription);
+        console.log(this.labels);
       },
       error => {
         this.onHttpError(error);
