@@ -2,11 +2,6 @@ import { Component } from '@angular/core';
 import {NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../data/data.service';
 import { NavigationExtras, Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { ImageService } from '../data/image.service';
-import { LabelService } from '../data/label.service';
 import { ImageIdService } from '../data/image-id.service';
 
 @Component({
@@ -56,7 +51,7 @@ export class ImageClassificationComponent {
   onHttpError(errorResponse:any) {
     console.log("Error: ", errorResponse);
     this.postError = true;
-    this.postErrorMessage = errorResponse.error.errorMessage;
+    this.postErrorMessage = errorResponse.error?.errorMessage;
   }
 
   onBlur(field: NgModel) {
