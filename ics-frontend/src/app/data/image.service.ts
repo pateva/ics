@@ -12,5 +12,5 @@ imageId: number = 0;
 imageUrl: string = '';
 width: number = 0;
 height: number = 0;
-tags: LabelService[] = [];;
+tags: LabelService[] = [];
 }
