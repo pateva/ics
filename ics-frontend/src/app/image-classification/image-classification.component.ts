@@ -40,7 +40,7 @@ export class ImageClassificationComponent {
   onHttpError(errorResponse:any) {
     console.log("Error: ", errorResponse);
     this.postError = true;
-    this.postErrorMessage = errorResponse.error.errorMessage;
+    this.postErrorMessage = errorResponse.error?.errorMessage;
   }
 
   onBlur(field: NgModel) {
