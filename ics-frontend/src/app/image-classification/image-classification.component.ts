@@ -16,12 +16,15 @@ import { ImageIdService } from '../data/image-id.service';
 
 })
 export class ImageClassificationComponent {
-  originalImageUrl: string = ''; 
   postError = false;
   postErrorMessage = '';
   isWaiting: boolean = false;
 
-  imageUrl: string = this.originalImageUrl
+  imageUrl: string = ' ';
+
+  constructor(private router: Router, private dataService: DataService) {
+
+  }
 
   onSubmit(form: NgForm) {
     if(form.valid) {
