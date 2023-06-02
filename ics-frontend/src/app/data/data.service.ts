@@ -26,7 +26,7 @@ export class DataService {
   }
 
   getImagesByLabels(labels: string[]) : Observable<any> {
-    const queryParams = labels.map(label => `label=${encodeURIComponent(label)}`).join('&');
+    const queryParams = labels.map(label => `labels=${encodeURIComponent(label)}`).join('&');
     return this.http.get(this.baseUrl + `?${queryParams}`);
   }
 

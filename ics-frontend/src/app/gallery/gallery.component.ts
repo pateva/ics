@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { ImageIdService } from '../data/image-id.service';
+import { Router } from '@angular/router';
 // import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatButtonModule } from '@angular/material/button';
 
@@ -17,7 +18,8 @@ export class GalleryComponent {
 
 
   constructor( private dataService: DataService,
-    private imageIdService: ImageIdService) {
+    private imageIdService: ImageIdService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -39,7 +41,6 @@ export class GalleryComponent {
   searchImages() {
       this.dataService.getImagesByLabels(this.getSearchQuery(this.searchQuery)).subscribe(
         result => {
-          console.log("Success: ", result);
           this.images = result.map((image: { imageUrl: string }) => image.imageUrl);
         },
         error => {
@@ -50,5 +51,9 @@ export class GalleryComponent {
 
   getSearchQuery(input: string) : string[] {
     return input.split(' ').filter(word => word.trim() !== '');
+  }
+
+  navigateToImage(id: number) {
+    this.router.navigateByUrl(`/image-classification/${id}`);
   }
 }
