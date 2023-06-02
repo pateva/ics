@@ -10,7 +10,7 @@
     </div>
     <div class="gallery-container">
       <div *ngFor="let image of images" class="gallery-image">
-        <img [src]="image.imageUrl" alt="Image">
+        <img [src]="image.imageUrl" alt="Image" (click)="navigateToImage(image.imageId)">
       </div>
     </div>
 </div>

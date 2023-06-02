@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'ics-single-image-page',
   templateUrl: './single-image-page.component.html',
@@ -38,7 +37,7 @@ export class SingleImagePageComponent {
     onHttpError(errorResponse:any) {
       console.log("Error: ", errorResponse);
       this.postError = true;
-      this.postErrorMessage = errorResponse.error.errorMessage;
+      this.postErrorMessage = errorResponse.error?.errorMessage;
     }
   }
 

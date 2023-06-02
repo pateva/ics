@@ -32,7 +32,7 @@ export class GalleryComponent {
   onHttpError(errorResponse: any) {
     console.log("Error: ", errorResponse);
     this.postError = true;
-    this.postErrorMessage = errorResponse.error.errorMessage;
+    this.postErrorMessage = errorResponse.error?.errorMessage;
   }
 
   searchImages() {
