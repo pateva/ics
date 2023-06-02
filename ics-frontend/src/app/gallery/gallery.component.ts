@@ -10,10 +10,11 @@ import { ImageIdService } from '../data/image-id.service';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent {
-  value: string = ''; // Declare the 'value' property
-  images: string[] = [];
+  images = [];
   postError = false;
   postErrorMessage = '';
+  searchQuery = ' ';
+
 
   constructor( private dataService: DataService,
     private imageIdService: ImageIdService) {
@@ -33,5 +34,21 @@ export class GalleryComponent {
     console.log("Error: ", errorResponse);
     this.postError = true;
     this.postErrorMessage = errorResponse.error.errorMessage;
+  }
+
+  searchImages() {
+      this.dataService.getImagesByLabels(this.getSearchQuery(this.searchQuery)).subscribe(
+        result => {
+          console.log("Success: ", result);
+          this.images = result.map((image: { imageUrl: string }) => image.imageUrl);
+        },
+        error => {
+          this.onHttpError(error);
+        }
+      );
+  }
+
+  getSearchQuery(input: string) : string[] {
+    return input.split(' ').filter(word => word.trim() !== '');
   }
 }

@@ -10,17 +10,24 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  baseUrl = 'http://localhost:8080/images';
+
   postImageUrl(imageUrl: string) : Observable<any> {
 
-    return this.http.post('http://localhost:8080/images', this.postImageRequestBody(imageUrl));
+    return this.http.post(this.baseUrl, this.postImageRequestBody(imageUrl));
   }
 
   getImageById(imageId: number) : Observable<any> {
-    return this.http.get(`http://localhost:8080/images/${imageId}`);
+    return this.http.get( this.baseUrl + `/${imageId}`);
   }
 
   getAllImages() : Observable<any> {
-    return this.http.get(`http://localhost:8080/images`);
+    return this.http.get(this.baseUrl);
+  }
+
+  getImagesByLabels(labels: string[]) : Observable<any> {
+    const queryParams = labels.map(label => `label=${encodeURIComponent(label)}`).join('&');
+    return this.http.get(this.baseUrl + `?${queryParams}`);
   }
 
   postImageRequestBody(imageUrl: string) : PostRequestBody {

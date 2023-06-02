@@ -1,16 +1,12 @@
 <div class="content-container">
 <ics-overlay *ngIf="isWaiting"></ics-overlay>
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
-
 <div class="input-url">
-  
 <mat-form-field class="example-form-field">
     <mat-label>Paste an URL of the image here</mat-label>
       <input name="url" type="text" matInput [(ngModel)]="imageUrl" 
       required #urlField="ngModel"
-      (blur)="onBlur(urlField)"
-      
-      >
+      (blur)="onBlur(urlField)">
     <mat-error *ngIf="imageUrl">Invalid URL format</mat-error>
     <button *ngIf="imageUrl" matSuffix mat-icon-button aria-label="Clear" (click)="imageUrl=''">
       <mat-icon>close</mat-icon>
