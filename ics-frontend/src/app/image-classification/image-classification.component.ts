@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {NgForm, NgModel } from '@angular/forms';
+import { DataService } from '../data/data.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'ics-image-classification',
   templateUrl: './image-classification.component.html',
@@ -7,15 +10,43 @@ import { FormControl, Validators } from '@angular/forms';
 
 })
 export class ImageClassificationComponent {
-  value: string = ''; // Declare the 'value' property
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  postError = false;
+  postErrorMessage = '';
+  isWaiting = false;
+  imageUrl = ' ';
 
-  isValidUrl(): boolean {
-    let regex = new RegExp('^(https?://)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(/[a-zA-Z0-9-]*)*(\?[a-zA-Z0-9-]+=[a-zA-Z0-9-]*)?$');
-  
-    return regex.test(this.value);
+  constructor(private router: Router, private dataService: DataService) {
+
   }
 
+  onSubmit(form: NgForm) {
+    if(form.valid) {
+    this.isWaiting = true;
+    console.log("In onSubmit: ", form.valid);
+    this.dataService.postImageUrl(this.imageUrl).subscribe(
+      result => {
+        console.log("Success: ", result);
+        const id = result.imageId;
+        this.isWaiting = false; // Update isWaiting to false
+        this.router.navigateByUrl(`/image-classification/${id}`);
+      },
+      error => {
+        this.onHttpError(error);
+        this.isWaiting = false; // Update isWaiting to false
+      }
+    );}   
+  }
+
+  onHttpError(errorResponse:any) {
+    console.log("Error: ", errorResponse);
+    this.postError = true;
+    this.postErrorMessage = errorResponse.error.errorMessage;
+  }
+
+  onBlur(field: NgModel) {
+    console.log("On blur:", field.valid);
+    
+  }
 }
 
 
