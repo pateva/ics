@@ -8,9 +8,11 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() otherThemeEvent = new EventEmitter<boolean>();
+  otherTheme = false;
 
   changeTheme() {
-    this.otherThemeEvent.emit(!this.otherThemeEvent);
+    this.otherTheme = !this.otherTheme;
+    this.otherThemeEvent.emit(this.otherTheme);
   }
 }
 
