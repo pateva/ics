@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { ImageIdService } from '../data/image-id.service';
 import { Router } from '@angular/router';
-// import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'ics-gallery',
