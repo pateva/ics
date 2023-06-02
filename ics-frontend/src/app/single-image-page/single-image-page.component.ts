@@ -15,17 +15,16 @@ export class SingleImagePageComponent {
   // imageId: number = 0;
   postError: boolean = false;
   postErrorMessage: any;
+  imageUrl: string = '';
 
   constructor(private dataService: DataService,
     private imageIdService: ImageIdService) {}
 
   ngOnInit() {
-    //const imageId = this.
-    //not sure how this should be
-
     this.dataService.getImageById(this.getImageId).subscribe(
       result => {
         console.log(this.getImageId);
+        this.imageUrl = result.imageUrl;
       },
       error => {
         this.onHttpError(error);
