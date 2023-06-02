@@ -39,9 +39,9 @@ $light-theme: mat.define-light-theme((
 }
 
 .alternative {
-  // @include mat.core-theme($light-theme);
-  // @include mat.core-color($light-theme);
-  // @include mat.button-color($light-theme);
+  @include mat.core-theme($light-theme);
+  @include mat.core-color($light-theme);
+  @include mat.button-color($light-theme);
   @include mat.all-component-themes($light-theme);
 }
 
