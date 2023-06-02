@@ -24,7 +24,6 @@ export class ImageClassificationComponent {
   constructor(private router: Router, 
     private dataService: DataService,
     private imageIdService: ImageIdService) {
-
   }
 
   onSubmit(form: NgForm) {

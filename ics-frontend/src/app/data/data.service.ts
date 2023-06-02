@@ -19,6 +19,10 @@ export class DataService {
     return this.http.get(`http://localhost:8080/images/${imageId}`);
   }
 
+  getAllImages() : Observable<any> {
+    return this.http.get(`http://localhost:8080/images`);
+  }
+
   postImageRequestBody(imageUrl: string) : PostRequestBody {
     const requestBody: PostRequestBody = {
       records: [
