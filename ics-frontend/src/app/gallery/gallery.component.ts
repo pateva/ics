@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ImageClassificationResponse } from '../interfaces/imageClassificationResponse';
 
 @Component({
@@ -53,4 +53,11 @@ export class GalleryComponent {
   navigateToImage(id: number) {
     this.router.navigateByUrl(`/image-classification/${id}`);
   }
+
+  closeOverlay() {
+    const currentUrl = this.router.url;
+  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl(currentUrl);
+  });
+}
 }

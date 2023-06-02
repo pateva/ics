@@ -9,6 +9,9 @@
       </mat-form-field>
     </div>
     <div class="gallery-container">
+      <div *ngIf="images.length === 0" class="empty-handle-card">
+        <ics-overlay-nothing-found (click)="closeOverlay()"></ics-overlay-nothing-found>
+      </div>
       <div *ngFor="let image of images" class="gallery-image">
         <img [src]="image.imageUrl" alt="Image" (click)="navigateToImage(image.imageId)">
       </div>

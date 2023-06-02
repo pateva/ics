@@ -19,6 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { OverlayComponent } from './overlay/overlay.component'; 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { OverlayNothingFoundComponent } from './overlay-nothing-found/overlay-nothing-found.component';
 
 
 
@@ -30,6 +31,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     GalleryComponent,
     HeaderComponent,
     OverlayComponent,
+    OverlayNothingFoundComponent,
    
   ],
   imports: [
