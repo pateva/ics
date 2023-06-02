@@ -38,7 +38,7 @@ export class GalleryComponent {
   searchImages() {
       this.dataService.getImagesByLabels(this.getSearchQuery(this.searchQuery)).subscribe(
         result => {
-          //this.images = result.map((image: { imageUrl: string }) => image.imageUrl);
+          this.images = result;
         },
         error => {
           this.onHttpError(error);
