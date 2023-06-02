@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable } from 'rxjs';
 import { DataService } from '../data/data.service';
-import { ImageService } from '../data/image.service';
 import { ImageIdService } from '../data/image-id.service';
-import { LabelService } from '../data/label.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'ics-single-image-page',
@@ -17,12 +15,18 @@ export class SingleImagePageComponent {
   postErrorMessage: any;
   imageUrl: string = '';
   labels: string[] = [];
+  id: number = 0;
 
   constructor(private dataService: DataService,
-    private imageIdService: ImageIdService) {}
+    private imageIdService: ImageIdService,
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.dataService.getImageById(this.getImageId).subscribe(
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    })
+
+    this.dataService.getImageById(this.id).subscribe(
       result => {
         this.imageUrl = result.imageUrl;
         this.labels = result.labels.map((label:{ labelDescription: string }) => label.labelDescription);
@@ -35,9 +39,9 @@ export class SingleImagePageComponent {
 
     get getImageId() : number {
       return this.imageIdService.imageId;
+      //this was variant 1 where I shared the id via the service
     }
 
-    
     onHttpError(errorResponse:any) {
       console.log("Error: ", errorResponse);
       this.postError = true;
