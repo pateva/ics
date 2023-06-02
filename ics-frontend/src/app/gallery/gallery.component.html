@@ -9,8 +9,8 @@
       </mat-form-field>
     </div>
     <div class="gallery-container">
-      <div *ngFor="let imageUrl of images" class="gallery-image">
-        <img [src]="imageUrl" alt="Image">
+      <div *ngFor="let image of images" class="gallery-image">
+        <img [src]="image.imageUrl" alt="Image">
       </div>
     </div>
 </div>

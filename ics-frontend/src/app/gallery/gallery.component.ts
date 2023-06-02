@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
-import { ImageIdService } from '../data/image-id.service';
 import { Router } from '@angular/router';
+import { ImageClassificationResponse } from '../interfaces/imageClassificationResponse';
 
 @Component({
   selector: 'ics-gallery',
@@ -9,21 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent {
-  images = [];
+  images: ImageClassificationResponse[] = [];
   postError = false;
   postErrorMessage = '';
   searchQuery = ' ';
 
 
   constructor( private dataService: DataService,
-    private imageIdService: ImageIdService,
     private router: Router) {
   }
 
   ngOnInit() {
     this.dataService.getAllImages().subscribe(
       result => {
-        this.images = result.map((image: { imageUrl: string }) => image.imageUrl);
+        this.images = result;
       },
       error => {
         this.onHttpError(error);
@@ -39,7 +38,7 @@ export class GalleryComponent {
   searchImages() {
       this.dataService.getImagesByLabels(this.getSearchQuery(this.searchQuery)).subscribe(
         result => {
-          this.images = result.map((image: { imageUrl: string }) => image.imageUrl);
+          //this.images = result.map((image: { imageUrl: string }) => image.imageUrl);
         },
         error => {
           this.onHttpError(error);

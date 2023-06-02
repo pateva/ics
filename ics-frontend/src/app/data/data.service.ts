@@ -9,11 +9,13 @@ import { ImageClassificationResponse } from "../interfaces/imageClassificationRe
 })
 export class DataService {
 
+  baseUrl = 'http://localhost:8080/images';
+
   constructor(private http: HttpClient) { }
 
   postImageUrl(imageUrl: string) : Observable<ImageClassificationResponse> {
 
-    return this.http.post<ImageClassificationResponse>('http://localhost:8080/images', this.postImageRequestBody(imageUrl));
+    return this.http.post<ImageClassificationResponse>(this.baseUrl, this.postImageRequestBody(imageUrl));
     
   }
 
@@ -28,4 +30,17 @@ export class DataService {
   
     return requestBody;
   }
+
+  getImageById(imageId: number) : Observable<ImageClassificationResponse> {
+    return this.http.get<ImageClassificationResponse>( this.baseUrl + `/${imageId}`);
+  }
+
+  getAllImages() : Observable<ImageClassificationResponse[]> {
+    return this.http.get<ImageClassificationResponse[]>(this.baseUrl);
+  }
+
+  getImagesByLabels(labels: string[]) : Observable<ImageClassificationResponse[]> {
+    const queryParams = labels.map(label => `labels=${encodeURIComponent(label)}`).join('&');
+    return this.http.get<ImageClassificationResponse[]>(this.baseUrl + `?${queryParams}`);
+}
 }
