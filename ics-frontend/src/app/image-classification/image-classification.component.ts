@@ -10,12 +10,15 @@ import { Router } from '@angular/router';
 
 })
 export class ImageClassificationComponent {
-  originalImageUrl: string = ''; 
   postError = false;
   postErrorMessage = '';
   isWaiting: boolean = false;
 
-  imageUrl: string = this.originalImageUrl
+  imageUrl: string = ' ';
+
+  constructor(private router: Router, private dataService: DataService) {
+
+  }
 
   onSubmit(form: NgForm) {
     if(form.valid) {
@@ -44,10 +47,6 @@ export class ImageClassificationComponent {
   onBlur(field: NgModel) {
     console.log("On blur:", field.valid);
     
-  }
-
-  constructor(private router: Router, private dataService: DataService) {
-
   }
 }
 
