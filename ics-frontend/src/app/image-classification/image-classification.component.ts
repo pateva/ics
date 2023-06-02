@@ -12,9 +12,8 @@ import { Router } from '@angular/router';
 export class ImageClassificationComponent {
   postError = false;
   postErrorMessage = '';
-  isWaiting: boolean = false;
-
-  imageUrl: string = ' ';
+  isWaiting = false;
+  imageUrl = ' ';
 
   constructor(private router: Router, private dataService: DataService) {
 
