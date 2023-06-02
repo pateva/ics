@@ -22,7 +22,9 @@ export class ImageClassificationComponent {
 
   imageUrl: string = ' ';
 
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(private router: Router, 
+    private dataService: DataService,
+    private imageIdService: ImageIdService) {
 
   }
 
@@ -72,11 +74,6 @@ export class ImageClassificationComponent {
     this.imageIdService.imageId = id;
   }
 
-  constructor(private router: Router, 
-    private dataService: DataService,
-    private imageIdService: ImageIdService) {
-
-  }
 }
 
 
