@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
-import { ImageIdService } from '../data/image-id.service';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -18,7 +17,6 @@ export class SingleImagePageComponent {
   id: number = 0;
 
   constructor(private dataService: DataService,
-    private imageIdService: ImageIdService,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -36,11 +34,6 @@ export class SingleImagePageComponent {
         this.onHttpError(error);
       }
     );} 
-
-    get getImageId() : number {
-      return this.imageIdService.imageId;
-      //this was variant 1 where I shared the id via the service
-    }
 
     onHttpError(errorResponse:any) {
       console.log("Error: ", errorResponse);
