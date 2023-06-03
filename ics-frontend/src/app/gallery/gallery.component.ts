@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-// import { MatToolbarModule } from '@angular/material/toolbar';
-// import { MatButtonModule } from '@angular/material/button';
+import { DataService } from '../data/data.service';
+import { NavigationExtras, Router } from '@angular/router';
+import { ImageClassificationResponse } from '../interfaces/imageClassificationResponse';
 
 @Component({
   selector: 'ics-gallery',
@@ -8,19 +9,55 @@ import { Component } from '@angular/core';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent {
-  value: string = ''; // Declare the 'value' property
-  imageUrls: string[] = [
-    'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/697BB0C4E76D527F55B6A7D6C4C719236D06A18FD7396F7514342BF4E301AAED/scale?width=1200&aspectRatio=1.78&format=jpeg',
-    'https://www.indiewire.com/wp-content/uploads/2022/06/Lilo-Stitch.jpg',
-    'https://www.indiewire.com/wp-content/uploads/2022/06/Lilo-Stitch.jpg',
-    'https://www.indiewire.com/wp-content/uploads/2022/06/Lilo-Stitch.jpg',
-    'https://www.indiewire.com/wp-content/uploads/2022/06/Lilo-Stitch.jpg',
-    'https://www.indiewire.com/wp-content/uploads/2022/06/Lilo-Stitch.jpg',
-    'https://pyxis.nymag.com/v1/imgs/e95/5d4/e02729391d31693ad53b90ab5a9644c68c-lilo-stitch-6.1x.rsquare.w1400.jpg',
-    'https://pyxis.nymag.com/v1/imgs/e95/5d4/e02729391d31693ad53b90ab5a9644c68c-lilo-stitch-6.1x.rsquare.w1400.jpg',
-    'https://pyxis.nymag.com/v1/imgs/e95/5d4/e02729391d31693ad53b90ab5a9644c68c-lilo-stitch-6.1x.rsquare.w1400.jpg',
-    'https://pyxis.nymag.com/v1/imgs/e95/5d4/e02729391d31693ad53b90ab5a9644c68c-lilo-stitch-6.1x.rsquare.w1400.jpg',
-    'https://www.indiewire.com/wp-content/uploads/2022/06/Lilo-Stitch.jpg',
-    'https://www.indiewire.com/wp-content/uploads/2022/06/Lilo-Stitch.jpg'
-  ];
+  images: ImageClassificationResponse[] = [];
+  postError = false;
+  postErrorMessage = '';
+  searchQuery = ' ';
+
+
+  constructor( private dataService: DataService,
+    private router: Router) {
+  }
+
+  ngOnInit() {
+    this.dataService.getAllImages().subscribe(
+      result => {
+        this.images = result;
+      },
+      error => {
+        this.onHttpError(error);
+      }
+    );}
+
+  onHttpError(errorResponse: any) {
+    console.log("Error: ", errorResponse);
+    this.postError = true;
+    this.postErrorMessage = errorResponse.error?.errorMessage;
+  }
+
+  searchImages() {
+      this.dataService.getImagesByLabels(this.getSearchQuery(this.searchQuery)).subscribe(
+        result => {
+          this.images = result;
+        },
+        error => {
+          this.onHttpError(error);
+        }
+      );
+  }
+
+  getSearchQuery(input: string) : string[] {
+    return input.split(' ').filter(word => word.trim() !== '');
+  }
+
+  navigateToImage(id: number) {
+    this.router.navigateByUrl(`/image-classification/${id}`);
+  }
+
+  closeOverlay() {
+    const currentUrl = this.router.url;
+  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    this.router.navigateByUrl(currentUrl);
+  });
+}
 }

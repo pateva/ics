@@ -32,6 +32,22 @@
   gap: 2%;
 }
 
+.empty-handle-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-label {
+    margin: 10px;
+    font-size: 20px;
+  }
+}
+
 .gallery-image {
   height: auto;
   /* Maintain aspect ratio */
@@ -45,5 +61,9 @@
     border-radius: .25rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, .75);
     margin-bottom: 5%;
+  }
+
+  img:hover {
+    cursor: pointer;
   }
 }
