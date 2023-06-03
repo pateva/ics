@@ -15,38 +15,31 @@ export class ImageClassificationComponent {
   isWaiting = false;
   imageUrl = ' ';
 
-  constructor(private router: Router, 
+  constructor(private router: Router,
     private dataService: DataService) {
   }
 
   onSubmit(form: NgForm) {
-    if(form.valid) {
-    this.isWaiting = true;
-    console.log("In onSubmit: ", form.valid);
-    this.dataService.postImageUrl(this.imageUrl).subscribe(
-      result => {
-        console.log("Success: ", result);
-        this.isWaiting = false; // Update isWaiting to false
-        this.router.navigateByUrl(`/image-classification/${result.imageId}`);
-      },
-      error => {
-        this.onHttpError(error);
-        this.isWaiting = false; // Update isWaiting to false
-      }
-    );}   
+    if (form.valid) {
+      this.isWaiting = true;
+      console.log("In onSubmit: ", form.valid);
+      this.dataService.postImageUrl(this.imageUrl).subscribe(
+        result => {
+          console.log("Success: ", result);
+          this.isWaiting = false; // Update isWaiting to false
+          this.router.navigateByUrl(`/image-classification/${result.imageId}`);
+        },
+        error => {
+          this.onHttpError(error);
+          this.isWaiting = false; // Update isWaiting to false
+        }
+      );
+    }
   }
 
-  onHttpError(errorResponse:any) {
+  onHttpError(errorResponse: any) {
     console.log("Error: ", errorResponse);
     this.postError = true;
     this.postErrorMessage = errorResponse.error?.errorMessage;
   }
-
-  onBlur(field: NgModel) {
-    console.log("On blur:", field.valid);
-
-  }
-
 }
-
-
