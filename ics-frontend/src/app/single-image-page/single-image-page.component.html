@@ -1,16 +1,17 @@
 <div class="container">
-<mat-card class="card">
+  <mat-card class="card">
     <img mat-card-image [src]="imageUrl" alt="Analysed image">
     <mat-card-content>
       <p>
-        <button mat-button *ngFor="let label of labels.slice(0, numDisplayedLabels)">{{label}}</button>
+        <button mat-button *ngFor="let label of labels.slice(0, numDisplayedLabels)"
+          (click)="searchByLabel(label)">{{label.labelDescription}}</button>
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button
-      matTooltip="Other labels: {{ labels.slice(numDisplayedLabels).join(', ') }}"
-      aria-label="Button that displays a tooltip when focused or hovered over">{{ labels.length - 5 }} more
-    </button>
+      <button mat-button matTooltip="Other labels: {{getOtherLabels()}}"
+        aria-label="Button that displays a tooltip when focused or hovered over">
+        {{ labels.length - numDisplayedLabels }} more
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>

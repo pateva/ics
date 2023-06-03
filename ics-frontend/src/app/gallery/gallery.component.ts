@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
-import { NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { ImageClassificationResponse } from '../interfaces/imageClassificationResponse';
 
 @Component({
@@ -15,8 +15,9 @@ export class GalleryComponent {
   searchQuery = ' ';
 
 
-  constructor( private dataService: DataService,
-    private router: Router) {
+  constructor(private dataService: DataService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -27,7 +28,16 @@ export class GalleryComponent {
       error => {
         this.onHttpError(error);
       }
-    );}
+    );
+
+    this.route.queryParams.subscribe(params => {
+      this.searchQuery = params['labels'];
+    })
+
+    if (this.searchQuery) {
+      this.searchImages();
+    }
+  }
 
   onHttpError(errorResponse: any) {
     console.log("Error: ", errorResponse);
@@ -36,18 +46,25 @@ export class GalleryComponent {
   }
 
   searchImages() {
-      this.dataService.getImagesByLabels(this.getSearchQuery(this.searchQuery)).subscribe(
-        result => {
-          this.images = result;
-        },
-        error => {
-          this.onHttpError(error);
-        }
-      );
+    const query = this.getSearchQuery(this.searchQuery);
+    this.dataService.getImagesByLabels(query).subscribe(
+
+      result => {
+        this.images = result;
+        this.updateUrl(query);
+      },
+      error => {
+        this.onHttpError(error);
+      }
+    );
   }
 
-  getSearchQuery(input: string) : string[] {
+  getSearchQuery(input: string): string[] {
     return input.split(' ').filter(word => word.trim() !== '');
+  }
+
+  updateUrl(queryParams: any) {
+    this.router.navigate([], { queryParams });
   }
 
   navigateToImage(id: number) {
@@ -56,8 +73,8 @@ export class GalleryComponent {
 
   closeOverlay() {
     const currentUrl = this.router.url;
-  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    this.router.navigateByUrl(currentUrl);
-  });
-}
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl(currentUrl);
+    });
+  }
 }
