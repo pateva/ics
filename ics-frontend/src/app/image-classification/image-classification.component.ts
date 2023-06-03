@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
 
@@ -20,24 +20,25 @@ export class ImageClassificationComponent {
   }
 
   onSubmit(form: NgForm) {
-    if(form.valid) {
-    this.isWaiting = true;
-    console.log("In onSubmit: ", form.valid);
-    this.dataService.postImageUrl(this.imageUrl).subscribe(
-      result => {
-        console.log("Success: ", result);
-        const id = result.imageId;
-        this.isWaiting = false; // Update isWaiting to false
-        this.router.navigateByUrl(`/image-classification/${id}`);
-      },
-      error => {
-        this.onHttpError(error);
-        this.isWaiting = false; // Update isWaiting to false
-      }
-    );}   
+    if (form.valid) {
+      this.isWaiting = true;
+      console.log("In onSubmit: ", form.valid);
+      this.dataService.postImageUrl(this.imageUrl).subscribe(
+        result => {
+          console.log("Success: ", result);
+          const id = result.imageId;
+          this.isWaiting = false; // Update isWaiting to false
+          this.router.navigateByUrl(`/image-classification/${id}`);
+        },
+        error => {
+          this.onHttpError(error);
+          this.isWaiting = false; // Update isWaiting to false
+        }
+      );
+    }
   }
 
-  onHttpError(errorResponse:any) {
+  onHttpError(errorResponse: any) {
     console.log("Error: ", errorResponse);
     this.postError = true;
     this.postErrorMessage = errorResponse.error?.errorMessage;
@@ -45,7 +46,7 @@ export class ImageClassificationComponent {
 
   onBlur(field: NgModel) {
     console.log("On blur:", field.valid);
-    
+
   }
 }
 

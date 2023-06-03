@@ -1,24 +1,24 @@
 .example-form-field {
-    width: 40vw;
-    text-align: left;
-    // border:solid;
-    // border-color: red;
-  }
+  width: 40vw;
+  text-align: left;
+  // border:solid;
+  // border-color: red;
+}
 
-  .content-container {
-    place-items: center;
-    display: grid;
-    min-height: fit-content;
-    // border:solid;
-    // border-color:  blue;
-    flex-direction: column;
-  }
-  
+.content-container {
+  place-items: center;
+  display: grid;
+  min-height: fit-content;
+  // border:solid;
+  // border-color:  blue;
+  flex-direction: column;
+}
 
-.input-url{
+
+.input-url {
   display: flex;
-    flex-direction: column;
-    place-items: center;
+  flex-direction: column;
+  place-items: center;
   //  border:solid;
   //    border-color: green;
 }

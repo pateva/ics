@@ -11,13 +11,13 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  postImageUrl(imageUrl: string) : Observable<ImageClassificationResponse> {
+  postImageUrl(imageUrl: string): Observable<ImageClassificationResponse> {
 
     return this.http.post<ImageClassificationResponse>('http://localhost:8080/images', this.postImageRequestBody(imageUrl));
-    
+
   }
 
-  postImageRequestBody(imageUrl: string) : PostRequestBody {
+  postImageRequestBody(imageUrl: string): PostRequestBody {
     const requestBody: PostRequestBody = {
       records: [
         {
@@ -25,7 +25,7 @@ export class DataService {
         }
       ]
     };
-  
+
     return requestBody;
   }
 }
