@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { PostRequestBody } from '../interfaces/postRequestBody';
-import { ImageClassificationResponse } from "../interfaces/imageClassificationResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  postImageUrl(imageUrl: string): Observable<ImageClassificationResponse> {
+  postImageUrl(imageUrl: string): Observable<any> {
 
     return this.http.post<ImageClassificationResponse>(this.baseUrl, this.postImageRequestBody(imageUrl));
     
