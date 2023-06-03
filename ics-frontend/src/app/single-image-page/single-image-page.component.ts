@@ -14,6 +14,7 @@ export class SingleImagePageComponent {
   imageUrl: string = '';
   labels: string[] = [];
   id: number = 0;
+  numDisplayedLabels = 5;
 
   constructor(private dataService: DataService,
     private route: ActivatedRoute) {}

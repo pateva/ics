@@ -36,15 +36,6 @@ export class ImageClassificationComponent {
     );}   
   }
 
-  navigateToImageClassification(imageId: number) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        imageId: imageId
-      }
-    };
-    this.router.navigateByUrl(`/image-classification/${imageId}`, navigationExtras);
-  }
-
   onHttpError(errorResponse:any) {
     console.log("Error: ", errorResponse);
     this.postError = true;
