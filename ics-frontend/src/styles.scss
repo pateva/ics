@@ -45,6 +45,9 @@ $light-theme: mat.define-light-theme((
   @include mat.all-component-themes($light-theme);
 }
 
+.mdc-button__label {
+  color: white;
+}
 
 body {
   margin: 0;
