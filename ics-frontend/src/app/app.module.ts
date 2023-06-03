@@ -10,13 +10,13 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
-import {HttpClientModule} from '@angular/common/http';
-import { OverlayComponent } from './overlay/overlay.component'; 
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { OverlayComponent } from './overlay/overlay.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
@@ -30,7 +30,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     GalleryComponent,
     HeaderComponent,
     OverlayComponent,
-   
+
   ],
   imports: [
     BrowserModule,
@@ -51,4 +51,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

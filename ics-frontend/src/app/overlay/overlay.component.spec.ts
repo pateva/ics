@@ -8,9 +8,9 @@ describe('OverlayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OverlayComponent ]
+      declarations: [OverlayComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(OverlayComponent);
     component = fixture.componentInstance;

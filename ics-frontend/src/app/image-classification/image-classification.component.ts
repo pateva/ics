@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../data/data.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -57,12 +57,12 @@ export class ImageClassificationComponent {
   onHttpError(errorResponse:any) {
     console.log("Error: ", errorResponse);
     this.postError = true;
-    this.postErrorMessage = errorResponse.error.errorMessage;
+    this.postErrorMessage = errorResponse.error?.errorMessage;
   }
 
   onBlur(field: NgModel) {
     console.log("On blur:", field.valid);
-    
+
   }
 
   get getImageId(): number {

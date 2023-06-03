@@ -1,16 +1,16 @@
 <div class="container">
-    <div class="input-search">
+  <div class="input-search">
     <mat-form-field class="example-form-field">
-        <mat-label>Search images based on tags</mat-label>
-        <input matInput type="text" [(ngModel)]="value">
-        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+      <mat-label>Search images based on tags</mat-label>
+      <input matInput type="text" [(ngModel)]="value">
+      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="gallery-container">
+    <div *ngFor="let imageUrl of imageUrls" class="gallery-image">
+      <img [src]="imageUrl" alt="Image">
     </div>
-    <div class="gallery-container">
-      <div *ngFor="let imageUrl of imageUrls" class="gallery-image">
-        <img [src]="imageUrl" alt="Image">
-      </div>
-    </div>
+  </div>
 </div>
