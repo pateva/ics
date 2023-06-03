@@ -4,7 +4,8 @@
     <div class="input-url">
       <mat-form-field class="example-form-field">
         <mat-label>Paste an URL of the image here</mat-label>
-        <input name="url" type="url" matInput [(ngModel)]="imageUrl" required #urlField="ngModel">
+        <input name="url" type="url" matInput [(ngModel)]="imageUrl" required 
+        #urlField="ngModel">
         <button *ngIf="urlField" matSuffix mat-icon-button aria-label="Clear" (click)="imageUrl=''">
           <mat-icon>close</mat-icon>
         </button>
@@ -13,9 +14,7 @@
       <div [hidden]="!postError" class="alert alert-danger">
         {{postErrorMessage}}
       </div>
-
       <button mat-raised-button color="primary" [disabled]="!form.valid">Analyze</button>
-
     </div>
   </form>
 </div>
