@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'ics-frontend';
   otherTheme = false;
 
-  changeTheme(newTheme:boolean) {
+  changeTheme(newTheme: boolean) {
     this.otherTheme = newTheme;
   }
 }

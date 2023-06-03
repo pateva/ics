@@ -1,5 +1,5 @@
 export interface PostRequestBody {
-    records: {
-        _url: string;
-      }[];
+  records: {
+    _url: string;
+  }[];
 }

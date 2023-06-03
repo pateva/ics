@@ -8,9 +8,9 @@ describe('SingleImagePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SingleImagePageComponent ]
+      declarations: [SingleImagePageComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SingleImagePageComponent);
     component = fixture.componentInstance;
