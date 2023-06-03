@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NgForm, NgModel } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { DataService } from '../data/data.service';
 import { NavigationExtras, Router } from '@angular/router';
 
@@ -53,7 +53,7 @@ export class ImageClassificationComponent {
 
   onBlur(field: NgModel) {
     console.log("On blur:", field.valid);
-    
+
   }
 
 }

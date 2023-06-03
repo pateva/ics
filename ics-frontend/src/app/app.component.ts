@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ics-frontend';
+  otherTheme = false;
+
+  changeTheme(newTheme: boolean) {
+    this.otherTheme = newTheme;
+  }
 }

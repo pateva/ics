@@ -8,9 +8,9 @@ describe('ImageClassificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImageClassificationComponent ]
+      declarations: [ImageClassificationComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ImageClassificationComponent);
     component = fixture.componentInstance;
