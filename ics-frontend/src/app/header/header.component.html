@@ -1,10 +1,14 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a mat-button (click)="reloadComponent(false,'/image-classification')">Tag your image</a>
+    <a mat-button data-test-id="tagImageButton"
+    (click)="reloadComponent(false,'/image-classification')">Tag your image</a>
     <div class="header-right">
-      <a mat-button (click)="reloadComponent(false, '/image-classification')">Analyze</a>
-      <a mat-button (click)="reloadComponent(false,'/gallery')">Gallery</a>
-      <a mat-button (click)="changeTheme()">Change mode</a>
+      <a mat-button data-test-id="tagImageButton2"
+      (click)="reloadComponent(false, '/image-classification')">Analyze</a>
+      <a mat-button data-test-id="galleryButton"
+      (click)="reloadComponent(false,'/gallery')">Gallery</a>
+      <a mat-button data-test-id="changeThemeButton"
+      (click)="changeTheme()">Change mode</a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
