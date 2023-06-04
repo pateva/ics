@@ -10,9 +10,7 @@ $dark-theme: mat.define-dark-theme((
   accent: mat.define-palette(mat.$blue-grey-palette, 800, 700, 900),
  ),
   // Only include `typography` and `density` in the default dark theme.
-  typography: mat.define-typography-config(
-  
-  ),
+  typography: mat.define-typography-config(),
   density: 0
 ));
 
@@ -43,10 +41,6 @@ $light-theme: mat.define-light-theme((
   @include mat.core-color($light-theme);
   @include mat.button-color($light-theme);
   @include mat.all-component-themes($light-theme);
-}
-
-.mdc-button__label {
-  color: white;
 }
 
 body {
