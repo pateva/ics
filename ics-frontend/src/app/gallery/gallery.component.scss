@@ -27,12 +27,13 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   /* Adjust the column width as needed */
-  grid-auto-rows: 200px;
+  grid-auto-rows: 300px;
   /* Adjust the row height as needed */
   gap: 1%;
   /* Adjust the gap as needed */
   align-content: start;
   /* Align the content to the top of the container */
+  margin-bottom: 5%;
 }
 
 .empty-handle-card {

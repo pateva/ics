@@ -12,7 +12,7 @@
     <div *ngIf="images.length === 0" class="empty-handle-card" (click)="closeOverlay()">
       <mat-label>Nothing found...</mat-label>
     </div>
-    <div *ngFor="let image of images" class="gallery-image">
+    <div *ngFor="let image of images.reverse()" class="gallery-image">
       <img [src]="image.imageUrl" alt="Image" (click)="navigateToImage(image.imageId)">
     </div>
   </div>
