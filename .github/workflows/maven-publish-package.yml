@@ -47,7 +47,7 @@ jobs:
     - name: Configure PostgreSQL       
       run: |          
         sudo su - postgres -c "psql -c 'CREATE DATABASE ics;'"
-        sudo su - postgres -c "psql -c 'CREATE USER myuser WITH ENCRYPTED PASSWORD ''11templerun11'';'"
+        sudo su - postgres -c "psql -c 'CREATE USER myuser WITH ENCRYPTED PASSWORD  ''11templerun11'';'"
         sudo su - postgres -c "psql -c 'GRANT ALL PRIVILEGES ON DATABASE ics TO postgres;'"
     
 
