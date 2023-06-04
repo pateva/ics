@@ -41,6 +41,15 @@ jobs:
 
     #- name: Build with Maven
     #  run: mvn -B package --file ics/pom.xml 
+    
+    - name: Start PostgreSQL        
+      run: sudo service postgresql start                
+    - name: Configure PostgreSQL       
+      run: |          
+        sudo -u postgres psql -c "CREATE DATABASE ics;"          
+        sudo -u postgres psql -c "CREATE USER myuser WITH ENCRYPTED PASSWORD '11templerun11';"         
+        sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ics TO postgres;"      
+
       
     - name: Run Spring Boot application
       run: mvn spring-boot:run --file ics/pom.xml &
