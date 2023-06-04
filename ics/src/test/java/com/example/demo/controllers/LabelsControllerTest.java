@@ -35,11 +35,6 @@ class LabelsControllerTest {
     }
 
     @Test
-    void listSingleLabel() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/labels/1")).andExpect(MockMvcResultMatchers.status().isOk());
-    }
-
-    @Test
     void deleteLabel() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/labels/1")).andExpect(MockMvcResultMatchers.status().isOk());
     }

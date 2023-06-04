@@ -39,11 +39,26 @@ jobs:
     - name: Build without Tests
       run: mvn -B package --file ics/pom.xml -DskipTests
 
-    - name: Build with Maven
-      run: mvn -B package --file ics/pom.xml -Dmaven.test.failure.ignore=true test
-
-    - name: Publish to GitHub Packages
+    #- name: Build with Maven
+    #  run: mvn -B package --file ics/pom.xml 
     
+    - name: Start PostgreSQL        
+      run: sudo service postgresql start                
+    - name: Configure PostgreSQL       
+      run: |          
+        sudo su - postgres -c "psql -c 'CREATE DATABASE ics;'"
+      
+    - name: Run Spring Boot application
+      run: mvn spring-boot:run --file ics/pom.xml &
+
+    - name: Wait for application to start
+      run: |
+          sleep 15 # Adjust this as needed to allow the Spring Boot application to start
+
+    - name: Run Rest-Assured tests
+      run: mvn test --file ics/pom.xml
+      
+    - name: Publish to GitHub Packages
       run:
         mvn -f ics/pom.xml deploy -s $GITHUB_WORKSPACE/settings.xml -Dmaven.test.failure.ignore=true test
         #mvn deploy 
