@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a mat-button routerLink="/image-classification">Tag your image</a>
+    <a mat-button (click)="reloadComponent(false,'/image-classification')">Tag your image</a>
     <div class="header-right">
-      <a mat-button routerLink="/image-classification">Analyze</a>
-      <a mat-button routerLink="/gallery">Gallery</a>
+      <a mat-button (click)="reloadComponent(false, '/image-classification')">Analyze</a>
+      <a mat-button (click)="reloadComponent(false,'/gallery')">Gallery</a>
       <a mat-button (click)="changeTheme()">Change mode</a>
     </div>
   </mat-toolbar-row>

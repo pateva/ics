@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from '../data/data.service';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImageClassificationResponse } from '../interfaces/imageClassificationResponse';
 
 @Component({
@@ -28,6 +28,7 @@ export class GalleryComponent {
     if (this.searchQuery) {
       this.searchImages();
       console.log("search query " + this.searchQuery);
+
     } else {
       this.dataService.getAllImages().subscribe(
         result => {
