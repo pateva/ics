@@ -46,9 +46,10 @@ jobs:
       run: sudo service postgresql start                
     - name: Configure PostgreSQL       
       run: |          
-        sudo -u postgres psql -c "CREATE DATABASE ics;"          
-        sudo -u postgres psql -c "CREATE USER myuser WITH ENCRYPTED PASSWORD '11templerun11';"         
-        sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE ics TO postgres;"      
+        sudo su - postgres -c "psql -c 'CREATE DATABASE ics;'"
+        sudo su - postgres -c "psql -c 'CREATE USER myuser WITH ENCRYPTED PASSWORD ''11templerun11'';'"
+        sudo su - postgres -c "psql -c 'GRANT ALL PRIVILEGES ON DATABASE ics TO postgres;'"
+    
 
       
     - name: Run Spring Boot application
