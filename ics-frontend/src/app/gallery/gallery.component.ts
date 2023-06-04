@@ -21,21 +21,22 @@ export class GalleryComponent {
   }
 
   ngOnInit() {
-    this.dataService.getAllImages().subscribe(
-      result => {
-        this.images = result;
-      },
-      error => {
-        this.onHttpError(error);
-      }
-    );
-
     this.route.queryParams.subscribe(params => {
       this.searchQuery = params['labels'];
     })
 
     if (this.searchQuery) {
       this.searchImages();
+      console.log("search query " + this.searchQuery);
+    } else {
+      this.dataService.getAllImages().subscribe(
+        result => {
+          this.images = result;
+        },
+        error => {
+          this.onHttpError(error);
+        }
+      );
     }
   }
 
@@ -52,6 +53,7 @@ export class GalleryComponent {
       result => {
         this.images = result;
         this.updateUrl(query);
+        console.log("result num " + this.images.length);
       },
       error => {
         this.onHttpError(error);
@@ -60,6 +62,7 @@ export class GalleryComponent {
   }
 
   getSearchQuery(input: string): string[] {
+    console.log("two");
     return input.split(' ').filter(word => word.trim() !== '');
   }
 
