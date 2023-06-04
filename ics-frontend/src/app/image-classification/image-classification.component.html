@@ -1,21 +1,20 @@
 <div class="content-container">
-<div class="input-url">
-  <form #form="ngForm">
-<mat-form-field class="example-form-field">
-    <mat-label>Paste an URL of the image here</mat-label>
-    <input  type="text" matInput [(ngModel)]="value">
-    <mat-error *ngIf="value && !isValidUrl()">Invalid URL format</mat-error>
-    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      <mat-icon>close</mat-icon>
-    </button>
-    
-</mat-form-field>
-
-<button mat-raised-button color="primary">Analyze</button>
-</form>
-
-
+  <ics-overlay *ngIf="isWaiting"></ics-overlay>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="input-url">
+      <mat-form-field class="example-form-field">
+        <mat-label>Paste an URL of the image here</mat-label>
+        <input name="url" type="url" matInput [(ngModel)]="imageUrl" required 
+        #urlField="ngModel">
+        <button *ngIf="urlField" matSuffix mat-icon-button aria-label="Clear" (click)="imageUrl=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-label class="formats">*Accepted formats: JPG, JPEG, PNG, WEBP, HEIC, BMP, TIFF, JFIF</mat-label>
+      <div [hidden]="!postError" class="alert alert-danger">
+        {{postErrorMessage}}
+      </div>
+      <button mat-raised-button color="primary" [disabled]="!form.valid">Analyze</button>
+    </div>
+  </form>
 </div>
-</div>
-
-{{form | json}}

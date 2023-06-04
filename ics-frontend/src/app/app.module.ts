@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,12 +10,17 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { HeaderComponent } from './header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {NgIf} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {MatCardModule} from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClientModule } from '@angular/common/http';
+import { OverlayComponent } from './overlay/overlay.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
+
 
 @NgModule({
   declarations: [
@@ -23,7 +29,8 @@ import {MatCardModule} from '@angular/material/card';
     SingleImagePageComponent,
     GalleryComponent,
     HeaderComponent,
-   
+    OverlayComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -33,12 +40,17 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    NgIf,
     FormsModule,
-    MatCardModule
+    MatCardModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
 
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}
