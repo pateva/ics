@@ -25,21 +25,26 @@ export class GalleryComponent {
       this.searchQuery = params['labels'];
     })
 
-    if (this.searchQuery) {
-      this.searchImages();
-      console.log("search query " + this.searchQuery);
-
-    } else {
-      this.dataService.getAllImages().subscribe(
-        result => {
-          this.images = result;
-        },
-        error => {
-          this.onHttpError(error);
-        }
-      );
-    }
+    this.imagesLogic();
   }
+
+ imagesLogic() {
+  if (this.searchQuery) {
+    this.searchImages();
+    console.log("search query " + this.searchQuery);
+
+  } else {
+    this.dataService.getAllImages().subscribe(
+      result => {
+        this.images = result;
+      },
+      error => {
+        this.onHttpError(error);
+      }
+    );
+  }
+
+ }
 
   onHttpError(errorResponse: any) {
     console.log("Error: ", errorResponse);
@@ -68,7 +73,13 @@ export class GalleryComponent {
   }
 
   updateUrl(queryParams: any) {
-    this.router.navigate([], { queryParams });
+    //this.router.navigate([], { queryParams });
+
+      this.router.navigate([], {
+        queryParams: {
+          labels: queryParams
+        },
+      });
   }
 
   navigateToImage(id: number) {
