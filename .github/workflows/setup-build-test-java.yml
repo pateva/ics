@@ -28,4 +28,4 @@ jobs:
       run: mvn -B package --file ics/pom.xml -DskipTests
     - name: Build with Tests
       run: mvn -B package --file ics/pom.xml -Dmaven.test.failure.ignore=true test
-       
+       # ignoring tests because of the missing DB configurationa and the failing REST assured tests
