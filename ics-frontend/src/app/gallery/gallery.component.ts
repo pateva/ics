@@ -73,8 +73,6 @@ export class GalleryComponent {
   }
 
   updateUrl(queryParams: any) {
-    //this.router.navigate([], { queryParams });
-
       this.router.navigate([], {
         queryParams: {
           labels: queryParams
