@@ -1,6 +1,8 @@
 # ics
 The Image Classification Service (ICS) allows users to submit image URLs and get the linked image classified (tagged) based on their perceived content. To do this, the service relies on the image recognition service [Ximilar](https://docs.ximilar.com/).
 
+The project was developed within the VMware Bulgaria Talentboost Academy 2023.
+
 Table of content:
 - [Overall architecture](https://github.com/pateva/ics/edit/main/README.md#overall-architectute)
 - [Requests](https://github.com/pateva/ics/edit/main/README.md#requests)
