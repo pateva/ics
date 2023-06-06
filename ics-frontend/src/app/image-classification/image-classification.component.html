@@ -3,18 +3,19 @@
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <div class="input-url">
       <mat-form-field class="example-form-field">
-        <mat-label>Paste an URL of the image here</mat-label>
-        <input name="url" type="url" matInput [(ngModel)]="imageUrl" required 
-        #urlField="ngModel">
-        <button *ngIf="urlField" matSuffix mat-icon-button aria-label="Clear" (click)="imageUrl=''">
+        <mat-label data-test-id="inputUrlPlaceholder">Paste an URL of the image here</mat-label>
+        <input data-test-id="imageUrlInput" name="url" type="url" matInput [(ngModel)]="imageUrl" required
+          #urlField="ngModel">
+        <button data-test-id="clearInputButton" *ngIf="urlField" matSuffix mat-icon-button aria-label="Clear"
+          (click)="imageUrl=''">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
-      <mat-label class="formats">*Accepted formats: JPG, JPEG, PNG, WEBP, HEIC, BMP, TIFF, JFIF</mat-label>
+      <mat-label data-test-id="formatsLabels" class="formats">*Accepted formats: JPG, JPEG, PNG, WEBP, HEIC, BMP, TIFF, JFIF</mat-label>
       <div [hidden]="!postError" class="alert alert-danger">
         {{postErrorMessage}}
       </div>
-      <button mat-raised-button color="primary" [disabled]="!form.valid">Analyze</button>
+      <button data-test-id="analyzeImageButton" mat-raised-button color="primary" [disabled]="!form.valid">Analyze</button>
     </div>
   </form>
 </div>
