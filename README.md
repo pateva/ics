@@ -71,7 +71,7 @@ Example body:
 {
  "records": [
      {
-         "_url": https://example.com/image.jpg"
+         "_url": "https://example.com/image.jpg"
      }
  ]
 }
@@ -99,7 +99,8 @@ Example response:
             "labelId": 4,
             "labelDescription": "ladybug"
         }
-    }
+      ]
+   }
 ```
 - `GET` /images/{id} -> returns an image with a specific image id
 - `DELETE` /images/{id} -> deletes image with a specific imageID from the DB
