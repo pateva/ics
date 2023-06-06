@@ -8,7 +8,7 @@ Table of content:
 - [Requests](https://github.com/pateva/ics/edit/main/README.md#requests)
 - [Demo and snaps](https://github.com/pateva/ics/edit/main/README.md#demo-and-snaps)
 
-#### Overall architectute
+#### Overall architecture
 
 <img src="https://github.com/pateva/ics/assets/83903221/bb62792c-3082-4284-8387-9bcc4a8bd496" width=500/>
 
