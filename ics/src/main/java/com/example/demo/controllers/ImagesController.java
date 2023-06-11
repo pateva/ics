@@ -13,6 +13,10 @@ import com.example.demo.services.XimilarAPI;
 import com.google.common.util.concurrent.RateLimiter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +33,11 @@ public class ImagesController {
 
     private final ImageRepository imageRepository;
     private final LabelsController labelsController;
+    int pageNumber = 1; // The page number (0-based index)
+    int pageSize = 9; // The number of items per page
+    Sort sort = Sort.by(Sort.Direction.DESC, "createdAt"); // Sorting options (optional)
+
+    Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
 
     @Autowired
     public ImagesController(ImageRepository imageRepository, LabelsController labelsController) {
@@ -37,11 +46,11 @@ public class ImagesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Image>> listImages(@RequestParam(required = false) List<String> labels) {
+    public ResponseEntity<Page<Image>> listImages(@RequestParam(required = false) List<String> labels) {
         if (labels == null) {
-            return new ResponseEntity<>(imageRepository.findAll(), HttpStatus.OK);
+            return new ResponseEntity<>(imageRepository.findAll(pageable), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(imageRepository.findImagesByLabels(labels), HttpStatus.OK);
+            return new ResponseEntity<>(imageRepository.findImagesByLabels(labels, pageable), HttpStatus.OK);
         }
     }
 
@@ -52,7 +61,7 @@ public class ImagesController {
             throw new ResourceNotFoundException("Image id does not exist!");
         }
 
-        return new ResponseEntity<>(imageRepository.findById(id).get(), HttpStatus.OK);
+        return new ResponseEntity<>(imageRepository.findById(id), HttpStatus.OK);
     }
 
 
